@@ -78,26 +78,7 @@ module.exports = {
     noFoundPageByTencent: false,
     sidebarDepth: 2,
     sidebar: {
-      '/back-end/1/': ['java_basics', 'java_advanced'],
-      '/back-end/2/': [
-        'java_web',
-        'mysql',
-        'xml',
-        'ajax',
-        'json',
-        'redis',
-        'maven',
-        'linux'
-      ],
-      '/back-end/3/': [
-        'git',
-        'spring',
-        'spring_mvc',
-        'mybatis',
-        'spring_boot',
-        'yaml'
-      ],
-      '/back-end/4/': ['docker', 'mongodb'],
+      '/dev-env/': ['wt', 'powershell', 'php'],
       '/front-end/1/': [
         'vscode',
         'html',
@@ -116,7 +97,26 @@ module.exports = {
       ],
       '/front-end/3/': ['nodejs', 'vue2', 'vue3'],
       '/front-end/4/': ['react', 'typescript', 'applet'],
-      '/dev-env/': ['wt', 'powershell', 'php']
+      '/java/1/': ['java_basics', 'java_advanced'],
+      '/java/2/': [
+        'java_web',
+        'mysql',
+        'xml',
+        'ajax',
+        'json',
+        'redis',
+        'maven',
+        'linux'
+      ],
+      '/java/3/': [
+        'git',
+        'spring',
+        'spring_mvc',
+        'mybatis',
+        'spring_boot',
+        'yaml'
+      ],
+      '/java/4/': ['docker', 'mongodb']
     },
     subSidebar: 'auto',
     lastUpdated: '上次更新',
