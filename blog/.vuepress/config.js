@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/blog/',
   title: 'Guany’s Blog',
   description: 'Guany’s Blog',
   head: [
@@ -65,7 +66,7 @@ module.exports = {
       },
       {
         text: 'GitHub',
-        link: 'https://github.com/tlyboy/tlyboy.github.io',
+        link: 'https://github.com/tlyboy/blog',
         icon: 'reco-github'
       }
     ],
