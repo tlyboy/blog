@@ -2,7 +2,7 @@
 title: AJAX
 date: 2022-3-22
 categories:
-  - 后端笔记
+  - Java 笔记
 tags:
   - JavaScript
   - XML
