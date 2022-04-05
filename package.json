@@ -1,7 +1,7 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "Guany’s Blog",
+  "description": "Guany 的博客",
   "license": "MIT",
   "author": "Guany",
   "main": "index.js",

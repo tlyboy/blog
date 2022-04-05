@@ -1,4 +1,4 @@
-# Guany’s Blog
+# Guany 的博客
 
 ## 一、简介
 
