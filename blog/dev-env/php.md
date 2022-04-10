@@ -121,7 +121,9 @@ web 分为两类：静态网站和动态网站
 
 2. 安装并配置环境变量
 
-> Apache 官网：[Welcome! - The Apache HTTP Server Project](https://httpd.apache.org/)
+:::tip
+Apache 官网：[Welcome! - The Apache HTTP Server Project](https://httpd.apache.org/)
+:::
 
 ### 2. Apache 的目录结构说明
 
@@ -186,7 +188,9 @@ Define SRVROOT "C:\Program Files\httpd\Apache24"
 
 3. 安装：将压缩包放到安装目录，可重命名。
 
-> PHP 官网：[PHP: Hypertext Preprocessor](https://www.php.net/)
+::: tip
+PHP 官网：[PHP: Hypertext Preprocessor](https://www.php.net/)
+:::
 
 ### 2. PHP 的目录结构说明
 
@@ -239,7 +243,9 @@ PHPIniDir 'C:/Program Files/php'
 1. 获取 MySQL 安装软件
 2. 双击安装即可
 
-> MySQL 官网：[MySQL](https://www.mysql.com/)
+::: tip
+MySQL 官网：[MySQL](https://www.mysql.com/)
+:::
 
 ### 2. MySQL 的目录说明结构
 
@@ -290,7 +296,9 @@ MySQL 是一款 C/S 架构的软件，需要通过客户端来访问服务端（
 
 3. 退出命令：/q
 
-> 注意：通常；连接认证的时候密码不建议明文，可以在输入 -p 之后回车，系统会再次让输入密码，这个时候就是密文
+::: warning
+注意：通常；连接认证的时候密码不建议明文，可以在输入 -p 之后回车，系统会再次让输入密码，这个时候就是密文
+:::
 
 ## 10. PHP 连接 MySQL 数据库
 

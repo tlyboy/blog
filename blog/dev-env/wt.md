@@ -36,13 +36,13 @@ Windows 11 已经内置了。
 ```json
 [
   {
-    "commandline": "cmd.exe /k",
+    "commandline": "%SystemRoot%\\System32\\cmd.exe /k",
     "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
     "hidden": false,
     "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
   },
   {
-    "commandline": "powershell.exe -nol",
+    "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nol",
     "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
     "hidden": false,
     "name": "Windows PowerShell"
@@ -65,6 +65,12 @@ Windows 11 已经内置了。
     "hidden": false,
     "name": "Git Bash",
     "source": "Git"
+  },
+  {
+    "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+    "hidden": false,
+    "name": "Ubuntu",
+    "source": "Windows.Terminal.Wsl"
   }
 ]
 ```
@@ -101,6 +107,7 @@ Windows 11 已经内置了。
 
 ```json
 {
+  "$help": "https://aka.ms/terminal-documentation",
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "actions": [
     {
@@ -145,13 +152,13 @@ Windows 11 已经内置了。
     },
     "list": [
       {
-        "commandline": "cmd.exe /k",
+        "commandline": "%SystemRoot%\\System32\\cmd.exe /k",
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": false,
         "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
       },
       {
-        "commandline": "powershell.exe -nol",
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nol",
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
         "hidden": false,
         "name": "Windows PowerShell"
@@ -174,6 +181,12 @@ Windows 11 已经内置了。
         "hidden": false,
         "name": "Git Bash",
         "source": "Git"
+      },
+      {
+        "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+        "hidden": false,
+        "name": "Ubuntu",
+        "source": "Windows.Terminal.Wsl"
       }
     ]
   },

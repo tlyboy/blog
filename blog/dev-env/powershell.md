@@ -11,7 +11,9 @@ tags:
 
 需要使用**最新**的 PowerShell，配合 Windows Terminal 体验更佳。
 
-> Windows Terminal 可以从 Microsoft Store（微软商店）下载。
+:::tip
+Windows Terminal 可以从 Microsoft Store（微软商店）下载。
+:::
 
 [PowerShell 文档 - PowerShell | Microsoft Docs](https://docs.microsoft.com/zh-cn/powershell/)
 
@@ -23,7 +25,9 @@ tags:
 
 gsudo 可以让你在 powershell 或其他 Windows 终端上使用 sudo 命令来提升权限。
 
-> **注意**：这个不仅可用于 PowerShell
+::: warning
+**注意**：这个不仅可用于 PowerShell
+:::
 
 ![image-20220320105333304](../../img/image-20220320105333304.png)
 
@@ -100,7 +104,9 @@ Import-Module git-aliases -DisableNameChecking
 
 美化 powershell 的库。
 
-> **注意**：需要使用 [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) 字体，这里我推荐使用 [CascadiaCode](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip) 的 CaskaydiaCove Nerd Font
+::: warning
+**注意**：需要使用 [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) 字体，这里我推荐使用 [CascadiaCode](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip) 的 CaskaydiaCove Nerd Font
+:::
 
 推荐使用我的版本和配置，效果图你已经看到过了！（从上往下看的话。🐶）
 
@@ -123,7 +129,9 @@ Set-PoshPrompt -Theme powerline
 
 一些文件图标。
 
-> **注意**：需要使用 [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) 字体，这里我推荐使用 [CascadiaCode](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip) 的 CaskaydiaCove Nerd Font
+::: warning
+**注意**：需要使用 [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) 字体，这里我推荐使用 [CascadiaCode](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip) 的 CaskaydiaCove Nerd Font
+:::
 
 ![image-20220320112923710](../../img/image-20220320112923710.png)
 
@@ -150,11 +158,15 @@ gsudo：[Releases · gerardog/gsudo (github.com)](https://github.com/gerardog/gs
 ```powershell
 Install-Module posh-git -Scope CurrentUser
 Install-Module git-aliases -Scope CurrentUser -AllowClobber
-Install-Module oh-my-posh -RequiredVersion 3.112.1 -Scope CurrentUser
+Install-Module oh-my-posh -Scope CurrentUser
 Install-Module -Name Terminal-Icons -Repository PSGallery
 ```
 
 `配置`：
+
+```powershell
+code $PROFILE
+```
 
 ```powershell
 Set-PSReadLineOption -PredictionSource History
@@ -163,6 +175,6 @@ Set-PSReadLineKeyHandler -Chord "Ctrl+f" -Function ForwardWord
 Import-Module posh-git
 Import-Module git-aliases -DisableNameChecking
 Import-Module oh-my-posh
-Set-PoshPrompt -Theme powerline
+Set-PoshPrompt -Theme robbyrussel
 Import-Module -Name Terminal-Icons
 ```
