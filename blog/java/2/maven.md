@@ -51,7 +51,9 @@ tags:
 <packaging>jar</packaging>
 ```
 
-> 这是一个缺省值，不写就是默认值
+::: tip
+这是一个缺省值，不写就是默认值
+:::
 
 ```xml
 <plugin>
@@ -95,7 +97,9 @@ tags:
 </build>
 ```
 
-> 可以使用 IDEA 的快捷键使用模板
+::: tip
+可以使用 IDEA 的快捷键使用模板
+:::
 
 ```xml
 <plugins>
@@ -111,7 +115,9 @@ tags:
 </plugins>
 ```
 
-> 可以通过这个插件来配置 Java 版本
+::: tip
+可以通过这个插件来配置 Java 版本
+:::
 
 ## 6. 依赖范围
 

@@ -232,9 +232,9 @@ AddType application/x-httpd-php .php
 PHPIniDir 'C:/Program Files/php'
 ```
 
-2.  php.ini 文件默认是不存在的，是以 development 和 production 格式存在，需要格式化。
+2. php.ini 文件默认是不存在的，是以 development 和 production 格式存在，需要格式化。
 
-    可以将 php.ini-development 复制一份并改为 php.ini
+   可以将 php.ini-development 复制一份并改为 php.ini
 
 ## 8. 安装与配置 MySQL
 
