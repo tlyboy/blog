@@ -121,7 +121,7 @@ web 分为两类：静态网站和动态网站
 
 2. 安装并配置环境变量
 
-:::tip
+::: tip
 Apache 官网：[Welcome! - The Apache HTTP Server Project](https://httpd.apache.org/)
 :::
 

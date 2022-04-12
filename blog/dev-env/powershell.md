@@ -11,7 +11,7 @@ tags:
 
 需要使用**最新**的 PowerShell，配合 Windows Terminal 体验更佳。
 
-:::tip
+::: tip
 Windows Terminal 可以从 Microsoft Store（微软商店）下载。
 :::
 
