@@ -93,17 +93,6 @@ module.exports = {
       ],
       '/front-end/3/': ['nodejs', 'vue2', 'vue3'],
       '/front-end/4/': ['react', 'typescript', 'applet'],
-      '/java/1/': ['java_basics'],
-      '/java/2/': [
-        'java_web',
-        'mysql',
-        'xml',
-        'ajax',
-        'json',
-        'redis',
-        'maven',
-        'linux'
-      ],
       '/java/3/': [
         'git',
         'spring',

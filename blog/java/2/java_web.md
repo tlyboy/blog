@@ -7,317 +7,361 @@ tags:
   - Java
 ---
 
-## 1. JavaWeb 介绍
+## 1. Java Web 介绍
 
-### 1. 为什么学习 JavaWeb
+### 1. 什么是 Java Web ？
 
-- JavaWeb：使用 Java 语言完成服务器端程序的开发
-- 获得现在主流的开发技术
+- Web：全球广域网，也称为万维网（www），能够通过浏览器访问的**网站**
+- Java Web：使用 Java 技术来解决相关 web 互联网领域的技术栈
 
-### 2. 适用人群
+1. 网页：展现数据
+2. 数据库：存储和管理数据
+3. Java Web 程序：逻辑处理
 
-- 有一定的 Java 基础知识
-  - 基础语法
-  - 面向对象思想
-  - JDK 常用 API：字符串、集合、IO
-  - 网络编程
-- 热爱编程
+网页 <——> Java Web 程序 <——> 数据库
 
-### 3. 课程安排
+- Java Web 课程安排
 
-- 数据库课程：数据存储技术
-- 前端课程：页面展示技术
-- web 核心课程：服务器端编程技术
-- 项目课程：使用 web 技术完成《黑马旅游网》项目
+| 课程     | 技术                                                                                                                |
+| -------- | ------------------------------------------------------------------------------------------------------------------- |
+| 数据库   | MySQL<br />JDBC<br />Maven<br />MyBatis                                                                             |
+| 前端     | HTML + CSS<br />JavaScript<br />Ajax + Vue + ElementUI                                                              |
+| web 核心 | Tomcat + HTTP + Servlet<br />Request + Response<br />JSP<br />Cookie + Session<br />Filter + Listener<br />综合案例 |
 
-### 4. 后期学习路径
+## 2. 数据库
 
-- SSM 框架：简化 web 开发的经典框架
-- SpringBoot：简化 Spring 开发的框架
-- SpringCloud：微服务开发解决方案
-- 各种中间件技术：
-  - Redis
-  - MongoDB
-  - RabbitMQ
-  - ElasticSearch
-- 容器化技术：Docker
-- 业务解决方案
+### 1. 数据库相关概念
 
-## 2. Junit 单元测试
+#### 1. 数据库相关概念
 
-### 1. 测试分类：
+- 数据库
+- 数据库管理系统
+- SQL
+- 常见的关系型数据库管理系统
 
-#### 1. 黑盒测试：
+**数据库**
 
-不需要写代码，给输入值，看程序是否能够输出期望的值。
+- 存储数据的仓库，数据库是由组织的进行存储
+- 英文：DataBase，检测 DB
 
-#### 2. 白盒测试：
+**数据库管理系统**
 
-需要些代码。关注程序具体的执行流程。
+- 管理数据库的大型软件
+- 英文：DataBase Management System，简称 DBMS
 
-### 2. junit 的使用：白盒测试
+**SQL**
 
-#### 1. 步骤
+- 英文：Structured Query Language，简称 SQL，结构化查询语言
+- 操作关系型数据库的编程语言
+- 定义操作所有关系型数据库的统一标准
 
-1. 定义一个测试类（测试用例）
-   - 建议：
-     - 测试类名：被测试的类名 Test
-     - 包名：xxx.xxx.xx.test
-2. 定义测试方法：可以独立运行
-   - 建议：
-     - 方法名：test 测试的方法名
-     - 返回值：void
-     - 参数列表：空参
-3. 给方法加 `@Test`
-4. 导入 junit 依赖环境
+#### 2. 常见的关系型数据库管理系统
 
-#### 2. 判定结果
+- Oracle：收费的大型数据库，Oracle 公司的产品
+- **MySQL**：开源免费的中小型数据库。后来 Sun 公司收购了 MySQL，而 Sun 公司又被 Oracle 收购
+- SQL Server：Microsoft 公司收费的中型的数据库。C #、.net 等语言常使用
+- PostgreSQL：开源免费中小型的数据库
+- DB2：IBM 公司的大型收费数据库产品
+- SQLite：嵌入的微型数据库。如：作为 Android 内置数据库
+- MariaDB：开源免费中小型的数据库
 
-- 红色：失败
+### 2. MySQL 数据库
 
-- 绿色：成功
+- MySQL 安装
+- MySQL 卸载
+- MySQL 配置
+- MySQL 登录、退出
+- MySQL 数据模型
 
-- 一般我们会使用断言操作来处理结果
+#### 1. MySQL 安装
 
-```java
-Assert.assertEquals(期望的结果,运算的结果);
+::: tip
+**安装环境：Win10 64 位**
+
+**软件版本：MySQL 5.7.24 解压版**
+:::
+
+##### 1. 下载
+
+点开下面的链接：
+
+https://downloads.mysql.com/archives/community/
+
+选择选择和自己**系统位数**相对应的版本点击右边的`Download`，此时会进到另一个页面。
+
+不用理会上面的登录和注册按钮，直接点击`No thanks, just start my download.`就可以下载。
+
+##### 2. 安装（解压）
+
+下载完成后我们得到的是一个压缩包，将其解压，我们就可以得到 MySQL 5.7.24 的软件本体了（就是一个文件夹），我们可以把它放在你想安装的位置。
+
+##### 3. 配置
+
+###### 1. 添加环境变量
+
+::: tip
+环境变量里面有很多选项，这里我们只用到`Path`这个参数。为什么在初始化的开始要添加环境变量呢？
+
+在黑框（即 CMD）中输入一个可执行程序的名字，Windows 会先在环境变量中的`Path`所指的路径中寻找一遍，如果找到了就直接执行，没找到就在当前工作目录找，如果还没找到，就报错。我们添加环境变量的目的就是能够在任意一个黑框直接调用 MySQL 中的相关程序而不用总是修改工作目录，大大简化了操作。
+:::
+
+右键`此电脑`→`属性`，点击`高级系统设置`
+
+点击`环境变量`
+
+在`系统变量`中新建 MYSQL_HOME
+
+在`系统变量`中找到并**双击**`Path`
+
+点击`新建`
+
+最后点击确定。
+
+**如何验证是否添加成功？**
+
+右键开始菜单（就是屏幕左下角），选择`命令提示符（管理员）`，打开黑框，敲入`mysql`，回车。
+如果提示`Can't connect to MySQL server on 'localhost'`则证明添加成功；
+如果提示`mysql不是内部或外部命令，也不是可运行的程序或批处理文件`则表示添加添加失败，请重新检查步骤并重试。
+
+###### 2. 新建配置文件
+
+新建一个文本文件，内容如下：
+
+```ini
+[mysql]
+default-character-set=utf8
+
+[mysqld]
+character-set-server=utf8
+default-storage-engine=INNODB
+sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
 ```
 
-#### 3. 补充
+把上面的文本文件另存为，在保存类型里选`所有文件（*.*）`，文件名叫`my.ini`，存放的路径为 MySQL 的`根目录`（例如我的是`D:\software\mysql-5.7.24-winx64`,根据自己的 MySQL 目录位置修改）。
 
-- `@Before`：
-  - 修饰的方法会在测试方法之前被自动执行
-- `@After`：
-  - 修饰的方法会在测试方法执行之后自动被执行
+上面代码意思就是配置数据库的默认编码集为 utf-8 和默认存储引擎为 INNODB。
 
-## 3. 反射：框架设计的灵魂
+###### 3. 初始化 MySQL
 
-### 1. 框架：
+在刚才的黑框中敲入`mysqld --initialize-insecure`，回车，稍微等待一会，如果出现没有出现报错信息(如下图)则证明 data 目录初始化没有问题，此时再查看 MySQL 目录下已经有 data 目录生成。
 
-半成品软件。可以在框架的基础上进行软件开发，简化编码
-
-### 2. 反射：
-
-将类的各个组成部分封装为其他对象，这就是反射机制
-
-### 3. 好处：
-
-1. 可以在程序运行的过程中，操作这些对象。
-2. 可以解耦，提高程序的可扩展性。
-
-### 4. 获取 Class 对象的方式：
-
-1. `Class.forName("全类名")`：将字节码文件加载进内存，返回 class 对象
-
-   - 多用于配置文件，将类名定义在配置文件中。读取文件，加载类
-
-2. `类名.class`：通过类名的属性 class 获取
-   - 多用于参数的传递
-3. `对象.getclass()`：getclass() 方法在 object 类中定义着。
-   - 多用于对象的获取字节码的方式
-
-### 5. 结论：
-
-同一个字节码文件（\*.class）在一次程序运行过程中，只会被加载一次，不论通过哪一种方式获取的 class 对象都是同一个。
-
-### 6. Class 对象的功能：
-
-#### 1. 获取功能：
-
-1. 获取成员变量们
-
-   - `Field[] getFields()`：获取所有 public 修饰的成员变量
-
-   - `Field getField(String name)`：获取指指定 public 修饰的成员变量
-
-   - `Field[] getDeclaredFields()`：获取所有的成员变量，不考虑修饰符
-
-   - `Field getDeclaredField(String name)`：获取指定成员变量，不考虑修饰符
-
-2. 获取构造方法们
-
-   - `Constructor<?>[] getConstructors()`
-
-   - `Constructor<T> getConstructor(Class<?>... parameterTypes)`
-
-   - `Constructor<?>[] getDeclaredConstructors()`
-
-   - `Constructor<T> getDeclaredConstructor(Class<?>... parameterTypes)`
-
-3. 获取成员方法们
-
-   - `Method[] getMethods()`
-
-   - `Method getMethod(String name, Class<?>... parameterTypes)`
-
-   - `Method[] getDeclaredMethods()`
-
-   - `Method getDeclaredMethod(String name, Class<?>... parameterTypes)`
-
-4. 获取类名
-
-   - `String getName()`
-
-#### 2. Field：成员变量
-
-- 操作：
-
-  1. 设置值
-     - `void set(Object obj, Object value)`
-  2. 获取值
-     - `Object get(Object obj)`
-  3. 忽略访问权限修饰符的安全检查
-     - `setAccessible(true);`：暴力反射
-
-#### 3. Constructor：构造方法
-
-- 创建对象：
-  - `T newInstance(Object... initargs)`
-  - 如果使用空参数构造方法创建对象，操作可以简化：class 对象的 newInstance 方法
-
-#### 4. Method：方法对象
-
-- 执行方法：
-  - `Object invoke(Object obj, Object... args)`
-- 获取方法名：
-  - `String getName()`：获取方法名
-
-#### 5. 案例：
-
-- 需求：写一个“框架”，可以帮我们创建任意类的对象，并且执行其中任意方法
-
-  - 实现：
-    1. 配置文件
-    2. 反射
-  - 步骤：
-    1. 将需要创建的对象的全类名和需要执行的方法定义在配置文件中
-    2. 在程序中加载读取配置文件
-    3. 使用反射技术来加载类文件进内存
-    4. 创建对象
-    5. 执行方法
-
-```java
-package com.tlyboy.demo;
-
-import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.util.Properties;
-
-public class Demo {
-    public static void main(String[] args) throws Exception {
-
-        Properties prop = new Properties();
-        InputStream is = Demo.class.getClassLoader().getResourceAsStream("prop.properties");
-        prop.load(is);
-
-        String className = prop.getProperty("className");
-        String methodName = prop.getProperty("methodName");
-
-        Class<?> Student = Class.forName(className);
-
-        Object student = Student.newInstance();
-
-        Method sayHello = Student.getMethod(methodName);
-
-        sayHello.invoke(student);
-    }
-}
+```bash
+$ mysqld --initialize-insecure
 ```
 
-## 4. 注解
+tips：如果出现如下错误
 
-### 1. 概念：
+是由于权限不足导致的，去`C:\Windows\System32` 下以管理员方式运行 cmd.exe
 
-说明程序的。给计算机看的
+###### 4. 注册 MySQL 服务
 
-### 2. 注释：
+在黑框里敲入`mysqld -install`，回车。
 
-用文字描述程序的。给程序员看的
-
-### 3. 定义：
-
-注解(Annotation)，也叫元数据。一种代码级别的说明。它是 JDK 1.5 及以后版本引入的一个特性，与类、接口、枚举是在同一个层次。它可以声明在包、类、字段、方法、局部变量、方法参数等的前面，用来对这些元秦进行说明，注释。
-
-### 4. 概念描述:
-
-- JDK 1.5 之后的新特性
-- 说明程序的
-- 使用注解：@注解名称
-
-### 5. 作用分类:
-
-1. 编写文档：通过代码里标识的元数据生成文档【生成文档 doc 文档】
-   - javadoc 类名.java
-2. 代码分析：通过代码里标识的元数据对代码进行分析【使用反射】
-3. 编译检查：通过代码里标识的元数据让编译器能够实现基本的编译检查【override】
-
-### 6. JDK 中预定义的一些注解
-
-- `@Override`：检测被该注解标注的方法是否是继承自父类（接口）的
-- `@Deprecated`：该注解标注的内容，标识已过时
-- `@SuppressWarnings`：压制警告
-  - 一般传递参数：`@SuppressWarnings("all")`
-
-### 7. 自定义注解
-
-#### 1. 格式：
-
-元注解
-
-```java
-public @interface 注解名称{
-	属性列表;
-}
+```bash
+$ mysqld -install
 ```
 
-#### 2. 本质：
+现在你的计算机上已经安装好了 MySQL 服务了。
 
-注解本质上就是一个接口，该接口默认继承 Annotation 接口
+MySQL 服务器
 
-- `public interface 接口名称 extends java.lang.annotation.Annotation {}`
+###### 5. 启动 MySQL 服务
 
-#### 3. 属性：
+在黑框里敲入`net start mysql`，回车。
 
-接口中可以定义的成员方法
+```bash
+$ net start mysql # 启动 mysql 服务
 
-- 要求：
-  1. 属性的返回值类型有下列取值
-     - **基本数据类型**
-     - **String**
-     - **枚举**
-     - **注解**
-     - **以上数据类型**
-  2. 定义了属性，在使用时需要给属性值
-     1. 如果定义属性时，使用 default 关键字给属性默认初始化值，则使用注解时，可以不进行属性的赋值
-     2. 如果只有一个属性需要赋值，并且属性的名称是 value，则 value 可以省略，直接定义值即可
-     3. 数组赋值时，值使用{}包裹。如果数组中只有一个值，则 {} 可以省略
-- 元注解：用于描述注解的注解
-  - `@Target`：描述注解能够作用的位置
-    - Element 取值：
-      - TYPE：可以作用于子类上
-      - METHOD：可以作用于方法上
-      - FIELD：可以作用域成员变量上
-  - `@Retention`：描述注解被保留的阶段
-    - `RetentionPolicy.RUNTIME`：当前被描述的注解，会保留到 class 字节码文件中，并被 JVM 读取到
-  - `@Documented`：描述注解是否被抽取到 API 文档中
-  - `@Inherited`：描述注解是否被子类继承
+$ net stop mysql # 停止 mysql 服务
+```
 
-### 8. 在程序使用（解析）注解
+###### 6. 修改默认账户密码
 
-1. 获取注解定义的位置的对象（Class，Method，Field）
+在黑框里敲入`mysqladmin -u root password 1234`，这里的`1234`就是指默认管理员（即 root 账户）的密码，可以自行修改成你喜欢的。
 
-2. 获取指定的注解
+```bash
+$ mysqladmin -u root password 1234
+```
 
-   - `getAnnotation(Class)`
+**至此，MySQL 5.7 解压版安装完毕！**
 
-     其实就是在内存中生成了一个该注解接口的子类实现对象
+##### 4. 登录 MySQL
 
-3. 调用注解中的抽象方法获取配置的属性值
+右键开始菜单，选择`命令提示符`，打开黑框。
+在黑框中输入，`mysql -uroot -p1234`，回车，出现下图且左下角为`mysql>`，则登录成功。
 
-### 9. 小结：
+```bash
+$ mysql -uroot -p1234
+```
 
-1. 以后大多数时候，我们会使用注解，而不是自定义注解
-2. 注解给谁用？
-   1. 编译器
-   2. 给解析程序用
-3. 注解不是程序的一部分，可以理解为注解就是一个标签
+**到这里你就可以开始你的 MySQL 之旅了！**
+
+退出 mysql：
+
+```bash
+$ exit
+$ quit
+```
+
+登陆参数：
+
+```bash
+$ mysql -u 用户名 -p 密码 -h 要连接的 mysql 服务器的 ip 地址（默认 127.0.0.1） -P 端口号（默认 3306）
+```
+
+##### 5. 卸载 MySQL
+
+如果你想卸载 MySQL，也很简单。
+
+右键开始菜单，选择`命令提示符（管理员）`，打开黑框。
+
+1. 敲入`net stop mysql`，回车。
+
+```bash
+$ net stop mysql
+```
+
+2. 再敲入`mysqld -remove mysql`，回车。
+
+```bash
+$ mysqld -remove mysql
+```
+
+3. 最后删除 MySQL 目录及相关的环境变量。
+
+**至此，MySQL 卸载完成！**
+
+#### 2. MySQL 数据模型
+
+**关系型数据库**
+
+关系型数据库都是建立在关系模型基础上的数据库，简单说，关系型数据库是由多张能互相连接的**二维表**组成的数据库
+
+- 优点
+  1. 都是使用表结构，格式一致，易于维护。
+  2. 使用通用的 SQL 语言操作，使用方便，可用于复杂查询。
+  3. 数据存储在磁盘中，安全。
+
+### 3. SQL
+
+- SQL 简介
+- SQL 通用语法
+- SQL 分类
+- DDL
+- DML
+- DQL
+
+#### 1. SQL 简介
+
+- 英文：Structured Query Language，简称 SQL
+- 结构化查询语言，一门操作关系型数据库的编程语言
+- 定义操作所有关系型数据库的统一标准
+- 对于同一个需求，每一种数据库操作的方式可能会存在一些不一样的地方，我们称为“方言”
+
+#### 2. SQL 通用语法
+
+1. SQL 语法可以单行或多行书写，以分号结尾。
+2. MySQL 数据库的 SQL 语句不区分大小写，关键字建议使用大写。
+3. 注释
+   - 单行注释：-- 注释内容 或 # 注释内容（MySQL 特有）
+   - 多行注释： /\* 注释 \*/
+
+#### 3. SQL 分类
+
+- **DDL**（Data Definition Language）数据定义语言，用来定义数据库对象：数据库，表，列等
+- **DML**（Data Manipulate Language）数据操作语言，用来对数据库中表的数据进行增删改
+- **DQL**（Data Query Language）数据查询语言，用来查询数据库中表的记录（数据）
+- **DCL**（Data Control Language）数据控制语言，用来定义数据库的访问权限和安全级别，及创建用户
+
+#### 4. DDL
+
+- **DDL**：操作数据库，表等
+- **DML**：对表中的数据进行增删改
+- **DQL**：对表中的数据进行查询
+- **DCL**：对数据库进行权限控制
+
+##### 1. 操作数据库
+
+###### 1. 查询
+
+```sql
+SHOW DATABASES;
+```
+
+###### 2. 创建
+
+- 创建数据库
+
+```sql
+CREATE DATABASE 数据库名称;
+```
+
+- 创建数据库（判断，如果不存在则创建）
+
+```sql
+CREATE DATABASE IF NOT EXISIS 数据库名称;
+```
+
+###### 3. 删除
+
+- 删除数据库
+
+```sql
+DROP DATABASE 数据库名称;
+```
+
+- 删除数据库（判断，如果存在则删除）
+
+```sql
+DROP DATABASE IF EXISTS 数据库名称;
+```
+
+###### 4. 使用数据库
+
+- 查看当前使用的数据库
+
+```sql
+SELECT DATABASE();
+```
+
+- 使用数据库
+
+```sql
+USE 数据库名称;
+```
+
+##### 2. 操作表
+
+- 创建（**C**reate）
+- 查询（**R**etrieve）
+- 修改（**U**pdate）
+- 删除（**D**elete）
+
+###### 1. 查询表
+
+- 查询当前数据库下所有表名称
+
+```sql
+SHOW TABLES;
+```
+
+- 查询表结构
+
+```sql
+DESC 表名称;
+```
+
+###### 2. 创建表
+
+```sql
+CREATE TABLE 表名 (
+	字段名1 数据类型1,
+    字段名2 数据类型2,
+    ...
+    字段名n 数据类型n
+);
+```
+
+::: warning 注意
+最后一行末尾，不能加逗号
+:::
