@@ -49,7 +49,9 @@ Spring Boot 提供了一种快速使用 Spring 的方式，基于约定优于配
 3. 辅助功能
 
 ::: tip
+
 Spring Boot 并不是对 Spring 功能上的增强，而是提供了一种快速使用 Spring 的方式。
+
 :::
 
 ## 3. Spring Boot 快速入门

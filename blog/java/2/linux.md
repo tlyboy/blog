@@ -96,9 +96,11 @@ CentOS……
 | var  | 用于存放运行时需要改变数据的文件                   |
 
 ::: tip
+
 root 管理员的 home 目录 root
 
 其他用户的 home 目录 home 目录中
+
 :::
 
 ## 4. Linux 的常用命令
