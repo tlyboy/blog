@@ -54,10 +54,6 @@ module.exports = {
             link: 'https://www.bilibili.com/read/cv9965357'
           },
           {
-            text: 'Python',
-            link: 'https://www.bilibili.com/read/cv10593914'
-          },
-          {
             text: '前端',
             link: 'https://www.bilibili.com/read/cv10431130'
           }
@@ -97,7 +93,7 @@ module.exports = {
       ],
       '/front-end/3/': ['nodejs', 'vue2', 'vue3'],
       '/front-end/4/': ['react', 'typescript', 'applet'],
-      '/java/1/': ['java_basics', 'java_advanced'],
+      '/java/1/': ['java_basics'],
       '/java/2/': [
         'java_web',
         'mysql',
