@@ -44,20 +44,19 @@ module.exports = {
       }
     },
     nav: [
-      { text: '主页', link: '/', icon: 'reco-home' },
-      { text: '时间轴', link: '/timeline/', icon: 'reco-date' },
+      {
+        text: '主页',
+        link: '/',
+        icon: 'reco-home'
+      },
+      {
+        text: '时间轴',
+        link: '/timeline/',
+        icon: 'reco-date'
+      },
       {
         text: '学习路线',
-        items: [
-          {
-            text: 'Java',
-            link: 'https://www.bilibili.com/read/cv9965357'
-          },
-          {
-            text: '前端',
-            link: 'https://www.bilibili.com/read/cv10431130'
-          }
-        ],
+        link: 'https://www.bilibili.com/read/cv14612853?spm_id_from=333.999.0.0',
         icon: 'reco-bilibili'
       },
       {
