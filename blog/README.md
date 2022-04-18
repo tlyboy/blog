@@ -1,6 +1,7 @@
 ---
 home: true
-heroImage: /hero.png
-heroText: Guany 的博客
-tagline: 作者：tlyboy
+heroText: null
+tagline: null
+bgImage: '/bg.jpg'
+bgImageStyle: { height: '350px' }
 ---
