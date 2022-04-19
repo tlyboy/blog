@@ -119,7 +119,7 @@ Import-Module git-aliases -DisableNameChecking
 `安装`：
 
 ```powershell
-Install-Module oh-my-posh -RequiredVersion 3.112.1 -Scope CurrentUser
+Install-Module oh-my-posh -Scope CurrentUser
 ```
 
 `配置`：

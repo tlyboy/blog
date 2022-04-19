@@ -38,18 +38,18 @@ Windows 11 已经内置了。
   {
     "commandline": "%SystemRoot%\\System32\\cmd.exe /k",
     "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-    "hidden": false,
+    "hidden": true,
     "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
   },
   {
     "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nol",
     "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-    "hidden": false,
+    "hidden": true,
     "name": "Windows PowerShell"
   },
   {
     "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-    "hidden": false,
+    "hidden": true,
     "name": "Azure Cloud Shell",
     "source": "Windows.Terminal.Azure"
   },
@@ -154,18 +154,18 @@ Windows 11 已经内置了。
       {
         "commandline": "%SystemRoot%\\System32\\cmd.exe /k",
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-        "hidden": false,
+        "hidden": true,
         "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
       },
       {
         "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nol",
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-        "hidden": false,
+        "hidden": true,
         "name": "Windows PowerShell"
       },
       {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "hidden": false,
+        "hidden": true,
         "name": "Azure Cloud Shell",
         "source": "Windows.Terminal.Azure"
       },
