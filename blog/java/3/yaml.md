@@ -24,7 +24,7 @@ server.address=127.0.0.1
 
 ```xml
 <server>
-	<port>8080</port>
+ <port>8080</port>
     <address>127.0.0.1</address>
 </server>
 ```

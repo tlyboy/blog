@@ -34,7 +34,7 @@ Spring Boot —— Spring Cloud —— 各种解决方案
 
 ### 1.概述
 
-Spring Boot 提供了一种快速使用 Spring 的方式，基于约定优于配置的思想，可以让开发人员不必在配置与逻辑业务之间进行思维的切换，全身心的投入到逻辑业务的代码编写中，从而大大提高了开发的效率，一定程度上缩短了项目周期。2014 年 4 月，Spring Boot 1.0.0 发布。Spring 的顶级项目之一(https://spring.io)。
+Spring Boot 提供了一种快速使用 Spring 的方式，基于约定优于配置的思想，可以让开发人员不必在配置与逻辑业务之间进行思维的切换，全身心的投入到逻辑业务的代码编写中，从而大大提高了开发的效率，一定程度上缩短了项目周期。2014 年 4 月，Spring Boot 1.0.0 发布。Spring 的顶级项目之一(<https://spring.io>)。
 
 ### 2. Spring 缺点
 
@@ -58,11 +58,11 @@ Spring Boot 并不是对 Spring 功能上的增强，而是提供了一种快速
 
 ### 1.案例
 
-#### 1. 需求：
+#### 1. 需求
 
 搭建 Spring Boot 工程，定义 HelloController.hello() 方法，返回”Hello Spring Boot!”。
 
-#### 2. 实现步骤：
+#### 2. 实现步骤
 
 1. 创建 Maven 项目
 2. 引入 Spring Boot 起步依赖

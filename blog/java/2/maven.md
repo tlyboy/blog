@@ -73,31 +73,31 @@ tags:
 
 1. 添加依赖
 
-```xml
-<dependencies>
-    <dependency>
-        <groupId></groupId>
-        <artifactId></artifactId>
-        <version></version>
-    </dependency>
-    ……
-</dependencies>
-```
+   ```xml
+   <dependencies>
+       <dependency>
+           <groupId></groupId>
+           <artifactId></artifactId>
+           <version></version>
+       </dependency>
+       ……
+   </dependencies>
+   ```
 
 2. 添加插件
 
-```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId></groupId>
-            <artifactId></artifactId>
-            <version></version>
-        </plugin>
-        ……
-    </plugins>
-</build>
-```
+   ```xml
+   <build>
+       <plugins>
+           <plugin>
+               <groupId></groupId>
+               <artifactId></artifactId>
+               <version></version>
+           </plugin>
+           ……
+       </plugins>
+   </build>
+   ```
 
 ::: tip
 

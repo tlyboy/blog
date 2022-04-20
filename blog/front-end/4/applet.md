@@ -945,20 +945,20 @@ Page({
 
 1. 通过 **bindtap**，可以为组件绑定 tap 触摸事件，语法如下：
 
-```html
-<button type="primary" bindtap="btnTapHandler">按钮</button>
-```
+   ```html
+   <button type="primary" bindtap="btnTapHandler">按钮</button>
+   ```
 
 2. 在页面的 .js 文件中定义对应的事件处理函数，事件参数通过形参 **event**（一般**简写成 e**）来接收：
 
-```javascript
-Page({
-  btnTapHandler(e) {
-    // 按钮的 tap 事件处理函数
-    console.log(e) // 事件参数对象 e
-  }
-})
-```
+   ```javascript
+   Page({
+     btnTapHandler(e) {
+       // 按钮的 tap 事件处理函数
+       console.log(e) // 事件参数对象 e
+     }
+   })
+   ```
 
 ##### 6. 在事件处理函数中为 data 中的数据赋值
 
@@ -1017,18 +1017,18 @@ btnHandler(event) {
 
 1. 通过 bindinput，可以为文本框绑定输入事件：
 
-```html
-<input bindinput="inputHandler"></input>
-```
+   ```html
+   <input bindinput="inputHandler"></input>
+   ```
 
 2. 在页面的 .js 文件中定义事件处理函数：
 
-```javascript
-inputHandler(e) {
-  // e.detail.value 是变化过后，文本框最新的值
-  console.log(e.detail.value)
-}
-```
+   ```javascript
+   inputHandler(e) {
+     // e.detail.value 是变化过后，文本框最新的值
+     console.log(e.detail.value)
+   }
+   ```
 
 ##### 9. 实现文本框和 data 之间的数据同步
 
@@ -2221,7 +2221,7 @@ wxs 的典型的应用场景就是“**过滤器**”，**经常配合 Mustache 
 以**分页**的形式，加载**指定分类下**商铺列表的数据：
 
 1. 接口地址
-   - https://www.escook.cn/categories/categories/**:cate_id**/shops
+   - <https://www.escook.cn/categories/categories/>**:cate_id**/shops
    - URL 地址中的 :cate_id 是动态参数，表示分类的 Id
 2. 请求方式
    - GET 请求
@@ -3215,7 +3215,7 @@ wx.request({
 在小程序中，实现 API Promise 化主要依赖于 **miniprogram-api-promise** 这个第三方的 npm 包。它的安装和使用步骤如下：
 
 ```bash
-$ npm install --save miniprogram-api-promise@1.0.4
+npm install --save miniprogram-api-promise@1.0.4
 ```
 
 ```javascript
@@ -3270,7 +3270,7 @@ async getInfo() {
 在项目中运行如下的命令，安装 Mobx 相关的包：
 
 ```bash
-$ npm install --save mobx-miniprogram@4.13.2 mobx-miniprogram-bindings@1.2.1
+npm install --save mobx-miniprogram@4.13.2 mobx-miniprogram-bindings@1.2.1
 ```
 
 ::: warning 注意
@@ -3438,7 +3438,7 @@ methods: {
 
 小程序的目录结构
 
-```
+```text
 .
 ├── app.js
 ├── app.json
@@ -3532,7 +3532,7 @@ methods: {
 
 小程序的目录结构
 
-```
+```text
 .
 ├── app.js
 ├── app.json

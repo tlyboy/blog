@@ -12,7 +12,7 @@ tags:
 
 MongoDB 用起来 - 快速上手\&集群和安全系列
 
-## 课程目标：
+## 课程目标
 
 - 理解 MongoDB 的业务场景、熟悉 MongoDB 的简介、特点和体系结构、数据类型等。
 - 能够在 Windows 和 Linux 下安装和启动 MongoDB、图像化管理界面和 Compass 的安装和使用

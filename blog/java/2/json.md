@@ -43,7 +43,7 @@ persons.persons['name']
 
 ## 3. JSON 数据和 Java 对象的相互转换
 
-### 1. JSON 解析器：常见的解析器：
+### 1. JSON 解析器：常见的解析器
 
 - Jsonlib，Gson，fastjson，**jackson**
 
@@ -56,13 +56,13 @@ persons.persons['name']
 
 ### 3. Java 对象转换 JSON
 
-#### 1. 转换方法：
+#### 1. 转换方法
 
 - `writeValue（参数1，obj）`:参数 1：File、Writer、OutputStream
 
 - `writeValueAsString（obj）`:将对象转换为 json 字符串
 
-#### 2. 注解：
+#### 2. 注解
 
 1. `@JsonIgnore`：排除属性
 2. `@JsonFormat`：属性值得格式化

@@ -260,12 +260,12 @@ fs.readFile('./files/1.txt ', 'utf8', (err1, r1) => {
 由于 node.js 官方提供的 fs 模块**仅支持**以**回调函数的方式**读取文件，**不支持 Promise 的调用方式**。因此，需要先允许如下的命令，安装 **then-fs** 这个第三方包，从而支持我们基于 Promise 的方式读取文件的内容：
 
 ```bash
-$ npm install then-fs
+npm install then-fs
 ```
 
 ##### 1. then-fs 的基本使用
 
-调用 then-fs 提供的 **readFile()** 方法，可以异步读取文件的内容，**它的返回值是 Promise 的实例对象**。因此可以**调用 .then() 方法 **为每个 Promise 异步操作指定**成功**和**失败**之后的回调函数。示例代码如下：
+调用 then-fs 提供的 **readFile()** 方法，可以异步读取文件的内容，**它的返回值是 Promise 的实例对象**。因此可以**调用 .then() 方法**为每个 Promise 异步操作指定**成功**和**失败**之后的回调函数。示例代码如下：
 
 ```javascript
 /**

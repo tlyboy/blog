@@ -70,17 +70,17 @@ Git Bash：Git 提供的命令行工具
 1. 打开 Git Bash
 2. 设置用户信息
 
-```bash
-$ git config --global user.name "Guany"
-$ git config --global user.email "1084072690@qq.com"
-```
+   ```bash
+   git config --global user.name "Guany"
+   git config --global user.email "1084072690@qq.com"
+   ```
 
 3. 查看配置信息
 
-```bash
-$ git config --global user.name
-$ git config --global user.email
-```
+   ```bash
+   git config --global user.name
+   git config --global user.email
+   ```
 
 #### 3. 为常用命令配置别名 （可选）
 
@@ -88,16 +88,16 @@ $ git config --global user.email
 
 1. 打开用户目录，创建 .bashrc 文件
 
-部分 windows 系统不允许用户创建点号开头的文件，可以打开 git bash，执行 `touch ~/.bashrc`
+   部分 windows 系统不允许用户创建点号开头的文件，可以打开 git bash，执行 `touch ~/.bashrc`
 
 2. 在 .bashrc 文件中输入如下内容：
 
-```bash
-# 用于输出 git 提交日志
-alias git-log='git log --pretty=oneline --all --graph --abbrev-commit'
-# 用于输出当前目录所有文件基本信息
-alias la='ls -lAh'
-```
+   ```bash
+   # 用于输出 git 提交日志
+   alias git-log='git log --pretty=oneline --all --graph --abbrev-commit'
+   # 用于输出当前目录所有文件基本信息
+   alias la='ls -lAh'
+   ```
 
 3. 打开 git bash，执行 `source ~/.bashrc`
 
@@ -105,16 +105,16 @@ alias la='ls -lAh'
 
 1. 打开 git bash 执行下面命令
 
-```bash
-$ git config --global core.quotepath false
-```
+   ```bash
+   git config --global core.quotepath false
+   ```
 
 2. $(git_home)/etc/bash.bashrc 文件加入下面两行
 
-```bash
-export LANG="zh_CN.UTF-8"
-export LC_ALL="zh_CN.UTF-8"
-```
+   ```bash
+   export LANG="zh_CN.UTF-8"
+   export LC_ALL="zh_CN.UTF-8"
+   ```
 
 ### 3. 获取本地仓库
 

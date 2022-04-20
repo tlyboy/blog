@@ -76,19 +76,19 @@ const jsx = (
 
 1. 引入 react 和 react-dom 两个 js 文件
 
-```html
-<script src="./node_modules/react/umd/react.development.js"></script>
-<script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
-```
+   ```html
+   <script src="./node_modules/react/umd/react.development.js"></script>
+   <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+   ```
 
 2. 创建 React 元素
 
-```html
-<script>
-  const title = React.createElement('h1', null, 'Hello React')
-  ReactDOM.render(title, document.getElementById('root'))
-</script>
-```
+   ```html
+   <script>
+     const title = React.createElement('h1', null, 'Hello React')
+     ReactDOM.render(title, document.getElementById('root'))
+   </script>
+   ```
 
 #### 3. 方法说明
 
@@ -148,10 +148,10 @@ ReactDOM.render(el, document.getElementById('root'))
 
 1. 导入 react 和 react-dom 两个包。
 
-```javascript
-import React from 'react'
-import ReactDOM from 'react-dom'
-```
+   ```javascript
+   import React from 'react'
+   import ReactDOM from 'react-dom'
+   ```
 
 2. 调用 `React.createElement()` 方法创建 react 元素。
 3. 调用 **ReactDOM.render()** 方法渲染 react 元素到页面中。
@@ -245,17 +245,17 @@ React.createElement(
 
 1. 使用 JSX 语法创建 react 元素
 
-```jsx
-// 使用 JSX 语法，创建 react 元素：
-const title = <h1>Hello JSX</h1>
-```
+   ```jsx
+   // 使用 JSX 语法，创建 react 元素：
+   const title = <h1>Hello JSX</h1>
+   ```
 
 2. 使用 ReactDOM.render() 方法渲染 react 元素到页面中
 
-```jsx
-// 渲染创建好的 React 元素
-ReactDOM.render(title, root)
-```
+   ```jsx
+   // 渲染创建好的 React 元素
+   ReactDOM.render(title, root)
+   ```
 
 #### 小结
 
@@ -365,15 +365,15 @@ const list = (
 
 1. 行内样式——style
 
-```jsx
-<h1 style={{ color: 'red', backgroundColor: 'skyblue' }}>JSX的样式处理</h1>
-```
+   ```jsx
+   <h1 style={{ color: 'red', backgroundColor: 'skyblue' }}>JSX的样式处理</h1>
+   ```
 
 2. **类名——className（推荐）**
 
-```jsx
-<h1 className="title">JSX的样式处理</h1>
-```
+   ```jsx
+   <h1 className="title">JSX的样式处理</h1>
+   ```
 
 ### 总结
 

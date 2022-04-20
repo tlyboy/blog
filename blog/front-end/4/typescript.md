@@ -153,7 +153,7 @@ let isLoading: boolean = false
 
 ### 4. 数组类型
 
-2. 对象类型：object（包括，数组、对象、函数等对象）
+1. 对象类型：object（包括，数组、对象、函数等对象）
 
 特点：对象类型，在 TS 中更加细化，每个具体的对象都有自己的类型语法。
 
@@ -204,25 +204,25 @@ let arr2: CustomArrary = ['x', 'y', 6, 7]
 
 1. 单独指定参数、返回值的类型：
 
-```typescript
-function add(num1: number, num2: number): number {
-  return num1 + num2
-}
-```
+   ```typescript
+   function add(num1: number, num2: number): number {
+     return num1 + num2
+   }
+   ```
 
-```typescript
-const add = (num1: number, num2: number): number => {
-  return num1 + num2
-}
-```
+   ```typescript
+   const add = (num1: number, num2: number): number => {
+     return num1 + num2
+   }
+   ```
 
 2. 同时指定参数、返回值的类型：
 
-```typescript
-const add: (num1: number, num2: number) => number = (num1, num2) => {
-  return num1 + num2
-}
-```
+   ```typescript
+   const add: (num1: number, num2: number) => number = (num1, num2) => {
+     return num1 + num2
+   }
+   ```
 
 解释：当函数作为表达式时，可以通过**类似箭头函数形式的语法**来为函数添加类型。
 

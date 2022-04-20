@@ -39,7 +39,7 @@ Spring 是分层的 Java SE/EE 应用 full-stack 轻量级开源框架，以 **I
 
 ### 2. 编写 Dao 接口和实现类
 
-#### 1. 接口：
+#### 1. 接口
 
 ```java
 package com.tlyboy.dao;
@@ -49,7 +49,7 @@ public interface UserDao {
 }
 ```
 
-#### 2. 实现类：
+#### 2. 实现类
 
 ```java
 package com.tlyboy.dao.impl;
@@ -106,7 +106,7 @@ public class UserDaoTest {
 - 用于配置对象由 **Spring** 来创建。
 - 默认情况下调用的是类中的**无参构造**，如果没有无参构造则不能创建成功。
 
-#### 基本属性：
+#### 基本属性
 
 - `id`：Bean 实例在 Spring 容器中的唯一标识
 - `class`：Bean 的全限定名称（全包名）
@@ -181,7 +181,7 @@ Bean 的生命周期：
 <property name="userDao" ref="userDao"></property>
 ```
 
-#### 3. P 命名空间注入：
+#### 3. P 命名空间注入
 
 ```xml
 <beans xmlns:p="http://www.springframework.org/schema/p"></beans>
@@ -333,53 +333,53 @@ app.getBean(Class);
 
 1. c3p0
 
-```java
-ComboPooledDataSource dataSource = new ComboPooledDataSource();
-```
+   ```java
+   ComboPooledDataSource dataSource = new ComboPooledDataSource();
+   ```
 
 2. Druid
 
-```java
-DruidDataSource dataSource = new DruidDataSource();
-```
+   ```java
+   DruidDataSource dataSource = new DruidDataSource();
+   ```
 
 #### 3. 设置数据源的基本连接数据
 
 1. c3p0
 
-```java
-dataSource.setDriverClass("com.mysql.jdbc.Driver");
-dataSource.setJdbcUrl("jdbc:mysql:///demo?useSSL=false");
-dataSource.setUser("root");
-dataSource.setPassword("1265");
-```
+   ```java
+   dataSource.setDriverClass("com.mysql.jdbc.Driver");
+   dataSource.setJdbcUrl("jdbc:mysql:///demo?useSSL=false");
+   dataSource.setUser("root");
+   dataSource.setPassword("1265");
+   ```
 
 2. Druid
 
-```java
-dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-dataSource.setUrl("jdbc:mysql:///demo?useSSL=false");
-dataSource.setUsername("root");
-dataSource.setPassword("1265");
-```
+   ```java
+   dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+   dataSource.setUrl("jdbc:mysql:///demo?useSSL=false");
+   dataSource.setUsername("root");
+   dataSource.setPassword("1265");
+   ```
 
 #### 4. 使用数据源获取连接资源和归还连接资源
 
 1. c3p0
 
-```java
-Connection connection = dataSource.getConnection();
-System.out.println(connection);
-connection.close();
-```
+   ```java
+   Connection connection = dataSource.getConnection();
+   System.out.println(connection);
+   connection.close();
+   ```
 
 2. Druid
 
-```java
-DruidPooledConnection connection = dataSource.getConnection();
-System.out.println(connection);
-connection.close();
-```
+   ```java
+   DruidPooledConnection connection = dataSource.getConnection();
+   System.out.println(connection);
+   connection.close();
+   ```
 
 ### 3. Spring 配置数据源
 
@@ -387,24 +387,24 @@ connection.close();
 
 1. ApplicationContext 配置文件加入
 
-```xml
-<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-    <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-    <property name="jdbcUrl" value="jdbc:mysql:///demo?useSSL=false"/>
-    <property name="user" value="root"/>
-    <property name="password" value="1265"/>
-</bean>
-```
+   ```xml
+   <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+       <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+       <property name="jdbcUrl" value="jdbc:mysql:///demo?useSSL=false"/>
+       <property name="user" value="root"/>
+       <property name="password" value="1265"/>
+   </bean>
+   ```
 
 2. 编写测试方法
 
-```java
-ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
-DataSource dataSource = app.getBean(DataSource.class);
-Connection connection = dataSource.getConnection();
-System.out.println(connection);
-connection.close();
-```
+   ```java
+   ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
+   DataSource dataSource = app.getBean(DataSource.class);
+   Connection connection = dataSource.getConnection();
+   System.out.println(connection);
+   connection.close();
+   ```
 
 ### 4.抽取 jdbc 配置文件
 
@@ -412,13 +412,13 @@ applicationContext.xml 加载 jdbc.properties 配置文件获得连接信息。
 
 首先，需要引入 context 命名空间和约束路径：
 
-#### 命名空间：
+#### 命名空间
 
-```
+```text
 xmlns:context="http://www.springframework.org/schema/context"
 ```
 
-#### 约束路径：
+#### 约束路径
 
 [http://www.springframework.org/schema/context](http://www.springframework.org/schema/context)
 
@@ -546,15 +546,15 @@ IAccountservice as = ac.getBean("accountservice", IAccountservice.class);
 
 1. 配置文件
 
-```java
-@ContextConfiguration("classpath:applicationContext.xml")
-```
+   ```java
+   @ContextConfiguration("classpath:applicationContext.xml")
+   ```
 
 2. 注解
 
-```java
-@ContextConfiguration(classes={SpringConfiguration.class})
-```
+   ```java
+   @ContextConfiguration(classes={SpringConfiguration.class})
+   ```
 
 #### 4. 使用 @Autowired 注入需要测试的对象
 
