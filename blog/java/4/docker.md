@@ -537,7 +537,7 @@ Linux 文件系统由 bootfs 和 rootfs 两部分组成
 - rootfs：root 文件系统，包含的就是典型 Linux 系统中的 /dev，/proc，/bin，/etc 等标准目录和文件
 - 不同的 linux 发行版，bootfs 基本一样，而 rootfs 不同，如 ubuntu，centos 等
 
-<br>
+<br />
 
 - Docker 镜像是由特殊的文件系统叠加而成
 - 最底端是 bootfs，并使用宿主机的 bootfs
