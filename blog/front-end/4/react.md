@@ -398,7 +398,98 @@ const list = (
 
 ### 1. React 组件介绍
 
+- 组件是 React 的**一等公民**，使用 React 就是在用组件
+- 组件表示页面中的部分功能
+- 组合多个组件实现完整的页面功能
+- 特点：可复用、独立、可组合
+
 ### 2. React 组件的两种创建方式
+
+1. 使用函数创建组件
+2. 使用类创建组件
+
+#### 1. 使用函数创建组件
+
+- 函数组件：使用 JS 的函数（或箭头函数）创建的组件
+- 约定 1：函数名必须以**大写字母开头**
+- 约定 2：函数组件**必须有返回值**，表示该组件的结构
+- 如果返回值为 null，表示不渲染任何内容
+
+```jsx
+function Hello() {
+  return <div>这是我的第一个组件！</div>
+}
+```
+
+- 渲染函数组件：**用函数名作为组件标签名**
+
+```jsx
+function Hello() {
+  return <div>这是我的第一个组件！</div>
+}
+ReactDOM.render(<Hello />, root)
+```
+
+- 使用 JS 中的函数创建的组件叫做：函数组件
+- 函数组件必须有返回值
+- 组件名称必须以大写字母开头、React 据此区分组件和普通的 React 元素
+
+```jsx
+function Hello() {
+  return <div>这是我的第一个组件！</div>
+}
+ReactDOM.render(<Hello />, root)
+```
+
+#### 2. 使用类创建组件
+
+- 类组件：使用 ES6 的 class 创建的组件
+- 约定 1：类名也必须以**大写字母开头**
+- 约定 2：类组件应该继承 **React.Component** 父类，从而可以使用父类中提供的方法或属性
+- 约定 3：类组件必须提供 **render()** 方法
+- 约定 4：render() 方法**必须有返回值**，表示该组件的结构
+
+```jsx
+class Hello extends React.Component {
+  render() {
+    return <div>Hello Class Component!</div>
+  }
+}
+ReactDOM.render(<Hello />, root)
+```
+
+#### 3. 抽离为独立 JS 文件
+
+- 思考：项目中的组件多了之后，该如何组织这些组件呢？
+- 选择一：将所有组件放在同一个 JS 文件中
+- 选择二：将每个组件放到单独的 JS 文件中
+- 组件作为一个独立的个体，一般都会**放到一个单独的 JS 文件中**
+
+1. 创建 Hello.js
+2. 在 Hello.js 中导入 React
+3. 创建组件（函数或类）
+4. 在 Hello.js 中导出该组件
+5. 在 index.js 中导入 Hello 组件
+6. 渲染组件
+
+```jsx
+// Hello.js
+import React from 'react'
+class Hello extends React.Component {
+  render() {
+    return <div>Hello Class Component!</div>
+  }
+}
+// 导出 Hello 组件
+export default Hello
+```
+
+```jsx
+// index.js
+import Hello './Hello'
+// 渲染导入的 Hello 组件
+ReactDOM.render(<Hello />, root)
+```
 
 ### 3. React 事件处理
 
