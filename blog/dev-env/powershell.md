@@ -119,14 +119,13 @@ Import-Module git-aliases -DisableNameChecking
 `安装`：
 
 ```powershell
-Install-Module oh-my-posh -Scope CurrentUser
+winget install JanDeDobbeleer.OhMyPosh
 ```
 
 `配置`：
 
 ```powershell
-Import-Module oh-my-posh
-Set-PoshPrompt -Theme powerline
+oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\robbyrussel.omp.json | Invoke-Expression
 ```
 
 相关链接：[Home | Oh My Posh](https://ohmyposh.dev/)
@@ -166,7 +165,7 @@ gsudo：[Releases · gerardog/gsudo (github.com)](https://github.com/gerardog/gs
 ```powershell
 Install-Module posh-git -Scope CurrentUser
 Install-Module git-aliases -Scope CurrentUser -AllowClobber
-Install-Module oh-my-posh -Scope CurrentUser
+winget install JanDeDobbeleer.OhMyPosh
 Install-Module -Name Terminal-Icons -Repository PSGallery
 ```
 
@@ -181,8 +180,7 @@ Set-PSReadLineOption -PredictionSource History
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Chord "Ctrl+f" -Function ForwardWord
 Import-Module posh-git
+oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\robbyrussel.omp.json | Invoke-Expression
 Import-Module git-aliases -DisableNameChecking
-Import-Module oh-my-posh
-Set-PoshPrompt -Theme robbyrussel
 Import-Module -Name Terminal-Icons
 ```
