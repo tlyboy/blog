@@ -44,7 +44,7 @@ module.exports = {
     },
     nav: [
       {
-        text: '主页',
+        text: '首页',
         link: '/',
         icon: 'reco-home'
       },
