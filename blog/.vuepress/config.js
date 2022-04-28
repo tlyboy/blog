@@ -54,11 +54,6 @@ module.exports = {
         icon: 'reco-date'
       },
       {
-        text: '学习路线',
-        link: 'https://www.bilibili.com/read/cv14612853?spm_id_from=333.999.0.0',
-        icon: 'reco-bilibili'
-      },
-      {
         text: 'GitHub',
         link: 'https://github.com/tlyboy/blog',
         icon: 'reco-github'

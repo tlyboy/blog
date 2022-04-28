@@ -493,7 +493,59 @@ ReactDOM.render(<Hello />, root)
 
 ### 3. React 事件处理
 
+1. 事件绑定
+2. 事件对象
+
+#### 1. 事件绑定
+
+- React 事件绑定语法与 DOM 事件语法相似
+- 语法：**on + 事件名称 = { 事件处理程序 }**，比如：onClick = {() => {}}
+- 注意：**React 事件采用驼峰命名法**，比如：onMouseEnter、onFocus
+- 在函数组件中绑定事件：
+
+```jsx
+class App extends React.Component {
+  handleClick() {
+    console.log('单击事件触发了')
+  }
+  render() {
+    return <button onClick={this.handleClick}></button>
+  }
+}
+```
+
+```jsx
+function App() {
+  function handleClick() {
+    console.log('单击事件触发了')
+  }
+
+  return <button onClick={handleClick}>点我</button>
+}
+```
+
+#### 2. 事件对象
+
+- 可以通过**事件处理程序的参数**获取到事件对象
+- React 中的事件对象叫做：**合成事件**（对象）
+- 合成事件：兼容所有浏览器，无需担心跨浏览器兼容性问题
+
+```jsx
+function handleClick(e) {
+  e.preventDefault()
+  console.log('事件对象', e)
+}
+;<a onClick={handleClick}>点我，不会跳转页面</a>
+```
+
 ### 4. 有状态组件和无状态组件
+
+- 函数组件又叫做**无状态组件**，类组件又叫做**有状态组件**
+- 状态（state）即**数据**
+- 函数组件没有自己的状态，**只负责数据展示**（静）
+- 类组件有自己的状态，**负责更新 UI**，让页面“动起来”
+
+比如计数器案例中，点击按钮让数值加 1，0 和 1 就是不同时刻的状态，而由 0 变为 1 就表示状态发生了变化。状态变化后，UI 也要相应的更新。React 中想要实现该功能，就要使用有状态组件来完成。
 
 ### 5. 组件中的 state 和 setState()
 
