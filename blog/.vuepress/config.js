@@ -1,7 +1,7 @@
 module.exports = {
   base: '/blog/',
   title: 'Guany 的博客',
-  description: 'Guany 的博客',
+  description: '这是我的新博客',
   head: [
     [
       'meta',
