@@ -4,7 +4,7 @@
 set -e
 
 # 生成静态文件
-pnpm run blog:build
+yarn run blog:build
 
 # 进入生成的文件夹
 cd blog/.vuepress/dist
