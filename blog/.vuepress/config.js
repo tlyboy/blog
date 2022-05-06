@@ -27,7 +27,9 @@ module.exports = {
   ],
   locales: {
     '/': {
-      lang: 'zh-CN'
+      lang: 'zh-CN',
+      title: 'Guany 的博客',
+      description: '这是我的新博客'
     }
   },
   theme: 'reco',

@@ -9,10 +9,8 @@
     "blog:dev": "vuepress dev blog",
     "blog:build": "vuepress build blog"
   },
-  "dependencies": {
-    "vuepress-theme-reco": "^1.6.11"
-  },
   "devDependencies": {
-    "vuepress": "^1.9.7"
+    "vuepress": "^1.9.7",
+    "vuepress-theme-reco": "^1.6.11"
   }
 }
