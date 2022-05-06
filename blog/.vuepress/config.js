@@ -34,16 +34,6 @@ module.exports = {
   },
   theme: 'reco',
   themeConfig: {
-    blogConfig: {
-      category: {
-        location: 2,
-        text: '分类'
-      },
-      tag: {
-        location: 3,
-        text: '标签'
-      }
-    },
     nav: [
       {
         text: '首页',
@@ -56,17 +46,17 @@ module.exports = {
         icon: 'reco-date'
       },
       {
-        text: 'GitHub',
-        link: 'https://github.com/tlyboy/blog',
-        icon: 'reco-github'
+        text: '联系',
+        icon: 'reco-message',
+        items: [
+          {
+            text: 'GitHub',
+            link: 'https://github.com/tlyboy',
+            icon: 'reco-github'
+          }
+        ]
       }
     ],
-    startYear: '2021',
-    author: 'tlyboy',
-    logo: '/head.png',
-    authorAvatar: '/avatar.png',
-    type: 'blog',
-    noFoundPageByTencent: false,
     sidebarDepth: 2,
     sidebar: {
       '/dev-env/': ['wt', 'powershell', 'php'],
@@ -98,9 +88,41 @@ module.exports = {
       ],
       '/java/4/': ['docker', 'mongodb']
     },
-    subSidebar: 'auto',
+    type: 'blog',
+    blogConfig: {
+      category: {
+        location: 2,
+        text: '分类'
+      },
+      tag: {
+        location: 3,
+        text: '标签'
+      }
+    },
+    friendLink: [
+      {
+        title: '午后南杂',
+        desc: 'Enjoy when you can, and endure when you must.',
+        email: '1156743527@qq.com',
+        link: 'https://www.recoluan.com'
+      },
+      {
+        title: 'vuepress-theme-reco',
+        desc: 'A simple and beautiful vuepress Blog & Doc theme.',
+        avatar:
+          'https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png',
+        link: 'https://vuepress-theme-reco.recoluan.com'
+      }
+    ],
+    logo: '/logo.png',
+    search: true,
+    searchMaxSuggestions: 10,
     lastUpdated: '上次更新',
-    smoothScroll: true
+    author: 'tlyboy',
+    authorAvatar: '/avatar.png',
+    startYear: '2021',
+    noFoundPageByTencent: false,
+    subSidebar: 'auto'
   },
   markdown: {
     lineNumbers: true
