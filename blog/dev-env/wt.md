@@ -17,21 +17,7 @@ Windows 11 已经内置了。
 
 ## 我的部分配置
 
-### 1. profiles.defaults
-
-```json
-{
-  "bellStyle": "none",
-  "colorScheme": "Material",
-  "cursorShape": "filledBox",
-  "font": {
-    "face": "CaskaydiaCove Nerd Font"
-  },
-  "useAcrylic": true
-}
-```
-
-### 2. profiles.list
+### profiles.list
 
 ```json
 [
@@ -63,7 +49,7 @@ Windows 11 已经内置了。
 ]
 ```
 
-### 3. schemes
+### schemes
 
 ```json
 {
@@ -91,7 +77,21 @@ Windows 11 已经内置了。
 }
 ```
 
-## 我的其他配置
+### profiles.defaults
+
+```json
+{
+  "bellStyle": "none",
+  "colorScheme": "Material",
+  "cursorShape": "filledBox",
+  "font": {
+    "face": "CaskaydiaCove Nerd Font"
+  },
+  "useAcrylic": true
+}
+```
+
+### 其他配置
 
 ```json
 {
