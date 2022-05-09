@@ -1009,6 +1009,30 @@ class Point3D {
 let p3: Point2D = new Point3D()
 ```
 
+- **函数之间兼容性比较复杂**，需要考虑：1 参数个数 2 参数类型 3 返回值类型。
+
+1. **参数个数**，参数多的兼容参数少的（或者说，**参数少的可以赋值给多的**）。
+
+```typescript
+type F1 = (a: number) => void
+type F2 = (a: number, b: number) => void
+let f1: F1
+let f2: F2 = f1
+```
+
+```ty
+const arr = ['a', 'b', 'c']
+arr.forEach(() => {})
+arr.forEach(item => {})
+```
+
+解释：
+
+1. 参数少的可以赋值给参数多的，所以，f1 可以赋值给 f2.
+2. 数组的 forEach 方法的第一个参数是回调函数，该示例中类型为：(value: string, index: number, array: string[]) => void。
+3. **在 JS 中省略用不到的函数实际上是很常见的，这样的使用方式，促成了 TS 中函数类型之间的兼容性。**
+4. 并且因为回调函数是有类型的，所以，TS 会自动推导出参数 item、index、array 的类型。
+
 ## 5. TypeScript 类型声明文件
 
 ## 6. 在 React 中使用 TypeScript
