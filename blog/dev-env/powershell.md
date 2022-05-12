@@ -187,3 +187,9 @@ oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\robbyrussel.omp.json | Invok
 Import-Module git-aliases -DisableNameChecking
 Import-Module -Name Terminal-Icons
 ```
+
+`其他`：
+
+```powershell
+Remove-Alias -Name ni -Force
+```
