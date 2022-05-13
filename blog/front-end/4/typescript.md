@@ -1020,7 +1020,7 @@ let f1: F1
 let f2: F2 = f1
 ```
 
-```ty
+```typescript
 const arr = ['a', 'b', 'c']
 arr.forEach(() => {})
 arr.forEach(item => {})
