@@ -91,7 +91,7 @@ module.exports = {
     lastUpdated: '上次更新',
     author: 'tlyboy',
     authorAvatar: '/avatar.png',
-    startYear: '2021',
+    startYear: '2022',
     noFoundPageByTencent: false,
     subSidebar: 'auto'
   },
