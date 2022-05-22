@@ -57,8 +57,6 @@ module.exports = {
         ]
       }
     ],
-    sidebarDepth: 2,
-    sidebar: {},
     type: 'blog',
     blogConfig: {
       category: {
