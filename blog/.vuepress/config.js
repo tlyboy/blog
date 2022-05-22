@@ -58,36 +58,7 @@ module.exports = {
       }
     ],
     sidebarDepth: 2,
-    sidebar: {
-      '/dev-env/': ['wt', 'powershell', 'php'],
-      '/front-end/1/': [
-        'vscode',
-        'html',
-        'html5',
-        'css',
-        'css3',
-        'pin_you_gou_case',
-        'mobile'
-      ],
-      '/front-end/2/': [
-        'javascript_basics',
-        'javascript_advanced',
-        'web_apis',
-        'jquery',
-        'ajax'
-      ],
-      '/front-end/3/': ['nodejs', 'vue2', 'vue3'],
-      '/front-end/4/': ['react', 'typescript', 'applet'],
-      '/java/3/': [
-        'git',
-        'spring',
-        'spring_mvc',
-        'mybatis',
-        'spring_boot',
-        'yaml'
-      ],
-      '/java/4/': ['docker', 'mongodb']
-    },
+    sidebar: {},
     type: 'blog',
     blogConfig: {
       category: {
