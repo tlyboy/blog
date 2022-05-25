@@ -1,6 +1,7 @@
 {
   "name": "blog",
   "version": "1.0.0",
+  "private": true,
   "description": "Guany 的博客",
   "license": "MIT",
   "author": "Guany",

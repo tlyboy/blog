@@ -1,3 +1,3 @@
 [build]
-  publish = "blog/.vuepress/dist"
-  command = "vuepress build blog"
+command = "vuepress build blog"
+publish = "blog/.vuepress/dist"
