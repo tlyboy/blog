@@ -10,7 +10,7 @@
     "blog:build": "vuepress build blog"
   },
   "devDependencies": {
-    "vuepress": "1.9.7",
-    "vuepress-theme-reco": "1.6.11"
+    "vuepress": "1.8.2",
+    "vuepress-theme-reco": "1.6.10"
   }
 }
