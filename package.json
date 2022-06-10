@@ -7,9 +7,11 @@
   "author": "Guany",
   "scripts": {
     "blog:dev": "vuepress dev blog",
-    "blog:build": "vuepress build blog"
+    "blog:build": "vuepress build blog",
+    "format": "prettier --write ."
   },
   "devDependencies": {
+    "prettier": "^2.6.2",
     "vuepress": "1.8.2",
     "vuepress-theme-reco": "1.6.10"
   }
