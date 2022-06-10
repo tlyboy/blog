@@ -8,7 +8,7 @@
   "scripts": {
     "blog:dev": "vuepress dev blog",
     "blog:build": "vuepress build blog",
-    "format": "prettier --write ."
+    "blog:format": "prettier --write ."
   },
   "devDependencies": {
     "prettier": "^2.6.2",
