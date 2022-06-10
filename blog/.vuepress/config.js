@@ -13,7 +13,7 @@ module.exports = {
       'link',
       {
         rel: 'shortcut icon',
-        href: '/favicon.ico',
+        href: 'https://cdn.tlyboy.com/favicon.ico',
         type: 'image/x-icon'
       }
     ],
@@ -21,7 +21,7 @@ module.exports = {
       'link',
       {
         rel: 'apple-touch-icon',
-        href: '/favicon.png'
+        href: 'https://cdn.tlyboy.com/favicon.png'
       }
     ]
   ],
@@ -68,12 +68,12 @@ module.exports = {
         text: '标签'
       }
     },
-    logo: '/logo.png',
+    logo: 'https://cdn.tlyboy.com/img/logo.png',
     search: true,
     searchMaxSuggestions: 10,
     lastUpdated: '上次更新',
     author: 'tlyboy',
-    authorAvatar: '/avatar.png',
+    authorAvatar: 'https://cdn.tlyboy.com/img/avatar.png',
     startYear: '2022',
     noFoundPageByTencent: false,
     subSidebar: 'auto'
