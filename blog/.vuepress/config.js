@@ -72,7 +72,7 @@ module.exports = {
     search: true,
     searchMaxSuggestions: 10,
     lastUpdated: '上次更新',
-    author: 'tlyboy',
+    author: 'Guany',
     authorAvatar: 'https://cdn.tlyboy.com/img/avatar.png',
     startYear: '2022',
     noFoundPageByTencent: false,
