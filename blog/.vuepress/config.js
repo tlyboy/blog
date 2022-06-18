@@ -68,12 +68,12 @@ module.exports = {
         text: '标签'
       }
     },
-    logo: 'https://cdn.tlyboy.com/img/logo.png',
+    logo: 'https://cdn.tlyboy.com/images/logo.png',
     search: true,
     searchMaxSuggestions: 10,
     lastUpdated: '上次更新',
     author: 'Guany',
-    authorAvatar: 'https://cdn.tlyboy.com/img/avatar.png',
+    authorAvatar: 'https://cdn.tlyboy.com/images/avatar.png',
     startYear: '2022',
     noFoundPageByTencent: false,
     subSidebar: 'auto'
