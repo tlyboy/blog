@@ -12,16 +12,8 @@ module.exports = {
     [
       'link',
       {
-        rel: 'shortcut icon',
-        href: 'https://cdn.tlyboy.com/favicon.ico',
-        type: 'image/x-icon'
-      }
-    ],
-    [
-      'link',
-      {
-        rel: 'apple-touch-icon',
-        href: 'https://cdn.tlyboy.com/favicon.png'
+        rel: 'icon',
+        href: 'https://cdn.tlyboy.com/favicon.ico'
       }
     ]
   ],
