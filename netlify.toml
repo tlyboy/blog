@@ -1,6 +1,3 @@
-[build.environment]
-NPM_FLAGS = "--version"
-
 [build]
 publish = "blog/.vuepress/dist"
-command = "npx pnpm i --store=node_modules/.pnpm-store && npm run blog:build"
+command = "vuepress build blog"
