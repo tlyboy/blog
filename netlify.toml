@@ -1,3 +1,6 @@
+[build.environment]
+NPM_FLAGS = "--prefix=/dev/null"
+
 [build]
 publish = "blog/.vuepress/dist"
-command = "vuepress build blog"
+command = "npx pnpm install -r --store=node_modules/.pnpm-store && vuepress build blog"
