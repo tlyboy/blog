@@ -3,4 +3,4 @@ NPM_FLAGS = "--version"
 
 [build]
 publish = "blog/.vuepress/dist"
-command = "npx pnpm install --store=node_modules/.pnpm-store && vuepress build blog"
+command = "npx pnpm i --store=node_modules/.pnpm-store && npm run blog:build"
