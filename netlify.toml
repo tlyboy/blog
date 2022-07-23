@@ -1,6 +1,6 @@
 [build]
 publish = "blog/.vuepress/dist"
-command = "npx pnpm install --store=node_modules/.pnpm-store && npm run blog:build"
+command = "npx pnpm install --store=node_modules/.pnpm-store && npx pnpm run blog:build"
 
 [build.environment]
 NODE_VERSION = "16"
