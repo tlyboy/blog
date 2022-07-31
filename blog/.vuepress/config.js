@@ -13,7 +13,7 @@ module.exports = {
       'link',
       {
         rel: 'icon',
-        href: 'https://cdn.tlyboy.com/favicon.ico'
+        href: '/favicon.ico'
       }
     ]
   ],
@@ -60,12 +60,12 @@ module.exports = {
         text: '标签'
       }
     },
-    logo: 'https://cdn.tlyboy.com/img/logo.png',
+    logo: '/assets/img/logo.png',
     search: true,
     searchMaxSuggestions: 10,
     lastUpdated: '上次更新',
     author: 'Guany',
-    authorAvatar: 'https://cdn.tlyboy.com/img/avatar.png',
+    authorAvatar: '/assets/img/avatar.png',
     startYear: '2022',
     noFoundPageByTencent: false,
     subSidebar: 'auto'
