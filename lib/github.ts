@@ -1,0 +1,125 @@
+import type { GitHubRepo } from '@/types/github'
+
+const token = process.env.GITHUB_TOKEN
+
+// 缓存用户名，避免重复请求
+let cachedUsername: string | null = null
+
+async function getUsername(): Promise<string | null> {
+  if (cachedUsername) return cachedUsername
+  if (!token) return null
+
+  const res = await fetch('https://api.github.com/user', {
+    headers: { Authorization: `Bearer ${token}` },
+    next: { revalidate: 3600 },
+  })
+
+  if (!res.ok) return null
+  const user = await res.json()
+  cachedUsername = user.login
+  return cachedUsername
+}
+
+function mapRepo(repo: Record<string, unknown>): GitHubRepo {
+  return {
+    id: repo.id as number,
+    name: repo.name as string,
+    full_name: repo.full_name as string,
+    html_url: repo.html_url as string,
+    description: repo.description as string | null,
+    homepage: repo.homepage as string | null,
+    language: repo.language as string | null,
+    stargazers_count: repo.stargazers_count as number,
+    forks_count: repo.forks_count as number,
+    updated_at: repo.updated_at as string,
+    default_branch: (repo.default_branch as string) || 'main',
+  }
+}
+
+export async function getRepos(): Promise<GitHubRepo[]> {
+  if (!token) return []
+
+  const res = await fetch(
+    'https://api.github.com/user/repos?sort=pushed&per_page=100&affiliation=owner',
+    {
+      headers: { Authorization: `Bearer ${token}` },
+      next: { revalidate: 600 },
+    }
+  )
+
+  if (!res.ok) return []
+
+  const data = await res.json()
+
+  return data
+    .filter((repo: Record<string, unknown>) => !repo.fork && !repo.private)
+    .map(mapRepo)
+}
+
+export async function getRepo(name: string): Promise<GitHubRepo | null> {
+  if (!token) return null
+
+  const username = await getUsername()
+  if (!username) return null
+
+  const res = await fetch(`https://api.github.com/repos/${username}/${name}`, {
+    headers: { Authorization: `Bearer ${token}` },
+    next: { revalidate: 600 },
+  })
+
+  if (!res.ok) return null
+
+  const repo = await res.json()
+
+  // 过滤 fork 和私有项目
+  if (repo.fork || repo.private) return null
+
+  return mapRepo(repo)
+}
+
+function resolveUrl(url: string, baseUrl: string): string {
+  return url.startsWith('http') ? url : `${baseUrl}/${url.replace(/^\.\//, '')}`
+}
+
+function processReadmeContent(content: string, rawBaseUrl: string): string {
+  return content
+    // 将 <picture> 标签转换为基于 class 的深色模式切换
+    .replace(
+      /<picture>[\s\S]*?<source\s+media=["']\(prefers-color-scheme:\s*dark\)["']\s+srcset=["']([^"']+)["'][^>]*>[\s\S]*?<img\s+([^>]*?)src=["']([^"']+)["']([^>]*?)>[\s\S]*?<\/picture>/gi,
+      (_, darkSrc, beforeSrc, lightSrc, afterSrc) => {
+        const alt = (beforeSrc + afterSrc).match(/alt=["']([^"']*)["']/)?.[1] || ''
+        return `<img class="block dark:hidden" alt="${alt}" src="${resolveUrl(lightSrc, rawBaseUrl)}">\n<img class="hidden dark:block" alt="${alt}" src="${resolveUrl(darkSrc, rawBaseUrl)}">`
+      }
+    )
+    // 移除包含图片的链接的 a 标签
+    .replace(/<a\s+[^>]*>(\s*(?:<img\s+[^>]*>\s*)+)<\/a>/gi, '$1')
+    // 清理每行前导空格（避免被当作代码块）
+    .replace(/^\s+/gm, '')
+    // 把只包含图片的 <p> 转换为 <div>
+    .replace(/<p(\s+[^>]*)>([\s\S]*?<img[\s\S]*?)<\/p>/gi, '<div$1>$2</div>')
+    // 处理相对路径图片
+    .replace(/(src=["'])(?!https?:\/\/)(\.\/)?([^"']+\.(png|jpg|jpeg|gif|svg|webp)["'])/gi, `$1${rawBaseUrl}/$3`)
+    .replace(/(\!\[.*?\]\()(?!https?:\/\/)(\.\/)?([^)]+\.(png|jpg|jpeg|gif|svg|webp)\))/gi, `$1${rawBaseUrl}/$3`)
+}
+
+export async function getRepoReadme(
+  fullName: string,
+  defaultBranch: string
+): Promise<string | null> {
+  if (!token) return null
+
+  const res = await fetch(`https://api.github.com/repos/${fullName}/readme`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github.raw+json',
+    },
+    next: { revalidate: 600 },
+  })
+
+  if (!res.ok) return null
+
+  const content = await res.text()
+  const rawBaseUrl = `https://raw.githubusercontent.com/${fullName}/${defaultBranch}`
+
+  return processReadmeContent(content, rawBaseUrl)
+}
