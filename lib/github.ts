@@ -44,7 +44,7 @@ export async function getRepos(): Promise<GitHubRepo[]> {
     {
       headers: { Authorization: `Bearer ${token}` },
       next: { revalidate: 600 },
-    }
+    },
   )
 
   if (!res.ok) return []
@@ -82,29 +82,45 @@ function resolveUrl(url: string, baseUrl: string): string {
 }
 
 function processReadmeContent(content: string, rawBaseUrl: string): string {
-  return content
-    // 将 <picture> 标签转换为基于 class 的深色模式切换
-    .replace(
-      /<picture>[\s\S]*?<source\s+media=["']\(prefers-color-scheme:\s*dark\)["']\s+srcset=["']([^"']+)["'][^>]*>[\s\S]*?<img\s+([^>]*?)src=["']([^"']+)["']([^>]*?)>[\s\S]*?<\/picture>/gi,
-      (_, darkSrc, beforeSrc, lightSrc, afterSrc) => {
-        const alt = (beforeSrc + afterSrc).match(/alt=["']([^"']*)["']/)?.[1] || ''
-        return `<img class="block dark:hidden" alt="${alt}" src="${resolveUrl(lightSrc, rawBaseUrl)}">\n<img class="hidden dark:block" alt="${alt}" src="${resolveUrl(darkSrc, rawBaseUrl)}">`
-      }
-    )
-    // 移除包含图片的链接的 a 标签
-    .replace(/<a\s+[^>]*>(\s*(?:<img\s+[^>]*>\s*)+)<\/a>/gi, '$1')
-    // 清理每行前导空格（避免被当作代码块）
-    .replace(/^\s+/gm, '')
-    // 把只包含图片的 <p> 转换为 <div>
-    .replace(/<p(\s+[^>]*)>([\s\S]*?<img[\s\S]*?)<\/p>/gi, '<div$1>$2</div>')
-    // 处理相对路径图片
-    .replace(/(src=["'])(?!https?:\/\/)(\.\/)?([^"']+\.(png|jpg|jpeg|gif|svg|webp)["'])/gi, `$1${rawBaseUrl}/$3`)
-    .replace(/(\!\[.*?\]\()(?!https?:\/\/)(\.\/)?([^)]+\.(png|jpg|jpeg|gif|svg|webp)\))/gi, `$1${rawBaseUrl}/$3`)
+  return (
+    content
+      // 将 <a><picture>...</picture></a> 转换为两个 img（同时移除 a 标签避免 button 嵌套）
+      .replace(/<a\s[^>]*>\s*<picture>([\s\S]*?)<\/picture>\s*<\/a>/gi, (_, inner) => {
+        const darkMatch = inner.match(/srcset=["']([^"']+)["']/)
+        const lightMatch = inner.match(/<img[\s\S]*?src=["']([^"']+)["']/)
+        const altMatch = inner.match(/alt=["']([^"']*)["']/)
+        if (!darkMatch || !lightMatch) return `<picture>${inner}</picture>`
+        const dark = resolveUrl(darkMatch[1], rawBaseUrl)
+        const light = resolveUrl(lightMatch[1], rawBaseUrl)
+        const alt = altMatch?.[1] || ''
+        return `<img class="block dark:hidden" alt="${alt}" src="${light}" />\n<img class="hidden dark:block" alt="${alt}" src="${dark}" />`
+      })
+      // 处理没有 a 标签包裹的 <picture>
+      .replace(/<picture>([\s\S]*?)<\/picture>/gi, (_, inner) => {
+        const darkMatch = inner.match(/srcset=["']([^"']+)["']/)
+        const lightMatch = inner.match(/<img[\s\S]*?src=["']([^"']+)["']/)
+        const altMatch = inner.match(/alt=["']([^"']*)["']/)
+        if (!darkMatch || !lightMatch) return `<picture>${inner}</picture>`
+        const dark = resolveUrl(darkMatch[1], rawBaseUrl)
+        const light = resolveUrl(lightMatch[1], rawBaseUrl)
+        const alt = altMatch?.[1] || ''
+        return `<img class="block dark:hidden" alt="${alt}" src="${light}" />\n<img class="hidden dark:block" alt="${alt}" src="${dark}" />`
+      })
+      // 处理相对路径图片
+      .replace(
+        /(src=["'])(?!https?:\/\/)(\.\/)?([^"']+\.(png|jpg|jpeg|gif|svg|webp)["'])/gi,
+        `$1${rawBaseUrl}/$3`,
+      )
+      .replace(
+        /(\!\[.*?\]\()(?!https?:\/\/)(\.\/)?([^)]+\.(png|jpg|jpeg|gif|svg|webp)\))/gi,
+        `$1${rawBaseUrl}/$3`,
+      )
+  )
 }
 
 export async function getRepoReadme(
   fullName: string,
-  defaultBranch: string
+  defaultBranch: string,
 ): Promise<string | null> {
   if (!token) return null
 

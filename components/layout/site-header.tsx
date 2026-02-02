@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ModeToggle } from '@/components/mode-toggle'
@@ -39,10 +40,12 @@ export function SiteHeader({ avatar, name }: SiteHeaderProps) {
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between">
         <Link href="/" className="group flex items-center gap-3">
           {avatar && (
-            <img
+            <Image
               className="size-9 rounded-full ring-2 ring-border transition-all group-hover:ring-primary"
               src={avatar}
               alt="avatar"
+              width={36}
+              height={36}
             />
           )}
           <span className="font-semibold">{name || 'Guany'} 的博客</span>
