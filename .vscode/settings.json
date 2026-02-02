@@ -1,0 +1,14 @@
+{
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-containers"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "prettier.enable": true
+}
