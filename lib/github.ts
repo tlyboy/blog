@@ -77,11 +77,55 @@ export async function getRepo(name: string): Promise<GitHubRepo | null> {
   return mapRepo(repo)
 }
 
-function resolveUrl(url: string, baseUrl: string): string {
-  return url.startsWith('http') ? url : `${baseUrl}/${url.replace(/^\.\//, '')}`
+// 可在 GitHub blob 页面查看的文件类型
+const VIEWABLE_EXTENSIONS = new Set([
+  'md', 'txt', 'rst', 'js', 'ts', 'jsx', 'tsx', 'py', 'go', 'rs', 'java',
+  'c', 'cpp', 'h', 'hpp', 'css', 'html', 'vue', 'svelte', 'json', 'yaml',
+  'yml', 'toml', 'xml', 'sh', 'bash', 'zsh', 'fish', 'rb', 'php', 'swift',
+  'kt', 'scala', 'clj', 'ex', 'exs', 'erl', 'hs', 'ml', 'r', 'sql', 'graphql',
+])
+
+// 判断是否为相对路径
+function isRelativePath(url: string): boolean {
+  return !/^(https?:\/\/|#|mailto:|tel:|data:)/i.test(url)
 }
 
-function processReadmeContent(content: string, rawBaseUrl: string): string {
+// 获取文件扩展名
+function getExtension(path: string): string {
+  const match = path.match(/\.([^./?#]+)(?:[?#]|$)/)
+  return match ? match[1].toLowerCase() : ''
+}
+
+// 生成 raw URL（用于嵌入资源）
+function getRawUrl(fullName: string, branch: string, path: string): string {
+  const cleanPath = path.replace(/^\.\//, '').replace(/^\//, '')
+  return `https://raw.githubusercontent.com/${fullName}/${branch}/${cleanPath}`
+}
+
+// 生成 blob URL（用于可查看文件的链接）
+function getBlobUrl(fullName: string, branch: string, path: string): string {
+  const cleanPath = path.replace(/^\.\//, '').replace(/^\//, '')
+  return `https://github.com/${fullName}/blob/${branch}/${cleanPath}`
+}
+
+// 解析相对路径为完整 URL
+function resolveUrl(url: string, fullName: string, branch: string, forEmbed: boolean): string {
+  if (!isRelativePath(url)) return url
+
+  if (forEmbed) {
+    // 嵌入资源始终使用 raw URL
+    return getRawUrl(fullName, branch, url)
+  }
+
+  // 链接：可查看文件用 blob URL，其他用 raw URL
+  const ext = getExtension(url)
+  if (VIEWABLE_EXTENSIONS.has(ext)) {
+    return getBlobUrl(fullName, branch, url)
+  }
+  return getRawUrl(fullName, branch, url)
+}
+
+function processReadmeContent(content: string, fullName: string, branch: string): string {
   return (
     content
       // 将 <a><picture>...</picture></a> 转换为两个 img（同时移除 a 标签避免 button 嵌套）
@@ -90,8 +134,8 @@ function processReadmeContent(content: string, rawBaseUrl: string): string {
         const lightMatch = inner.match(/<img[\s\S]*?src=["']([^"']+)["']/)
         const altMatch = inner.match(/alt=["']([^"']*)["']/)
         if (!darkMatch || !lightMatch) return `<picture>${inner}</picture>`
-        const dark = resolveUrl(darkMatch[1], rawBaseUrl)
-        const light = resolveUrl(lightMatch[1], rawBaseUrl)
+        const dark = resolveUrl(darkMatch[1], fullName, branch, true)
+        const light = resolveUrl(lightMatch[1], fullName, branch, true)
         const alt = altMatch?.[1] || ''
         return `<img class="block dark:hidden" alt="${alt}" src="${light}" />\n<img class="hidden dark:block" alt="${alt}" src="${dark}" />`
       })
@@ -101,19 +145,42 @@ function processReadmeContent(content: string, rawBaseUrl: string): string {
         const lightMatch = inner.match(/<img[\s\S]*?src=["']([^"']+)["']/)
         const altMatch = inner.match(/alt=["']([^"']*)["']/)
         if (!darkMatch || !lightMatch) return `<picture>${inner}</picture>`
-        const dark = resolveUrl(darkMatch[1], rawBaseUrl)
-        const light = resolveUrl(lightMatch[1], rawBaseUrl)
+        const dark = resolveUrl(darkMatch[1], fullName, branch, true)
+        const light = resolveUrl(lightMatch[1], fullName, branch, true)
         const alt = altMatch?.[1] || ''
         return `<img class="block dark:hidden" alt="${alt}" src="${light}" />\n<img class="hidden dark:block" alt="${alt}" src="${dark}" />`
       })
-      // 处理相对路径图片
+      // 处理 HTML src 属性（图片、视频等嵌入资源）
       .replace(
-        /(src=["'])(?!https?:\/\/)(\.\/)?([^"']+\.(png|jpg|jpeg|gif|svg|webp)["'])/gi,
-        `$1${rawBaseUrl}/$3`,
+        /(src=["'])([^"']+)(["'])/gi,
+        (match, prefix, url, suffix) => {
+          if (!isRelativePath(url)) return match
+          return `${prefix}${getRawUrl(fullName, branch, url)}${suffix}`
+        },
       )
+      // 处理 HTML href 属性（链接）
       .replace(
-        /(\!\[.*?\]\()(?!https?:\/\/)(\.\/)?([^)]+\.(png|jpg|jpeg|gif|svg|webp)\))/gi,
-        `$1${rawBaseUrl}/$3`,
+        /(href=["'])([^"']+)(["'])/gi,
+        (match, prefix, url, suffix) => {
+          if (!isRelativePath(url)) return match
+          return `${prefix}${resolveUrl(url, fullName, branch, false)}${suffix}`
+        },
+      )
+      // 处理 Markdown 图片 ![alt](url)
+      .replace(
+        /(\!\[[^\]]*\]\()([^)]+)(\))/g,
+        (match, prefix, url, suffix) => {
+          if (!isRelativePath(url)) return match
+          return `${prefix}${getRawUrl(fullName, branch, url)}${suffix}`
+        },
+      )
+      // 处理 Markdown 链接 [text](url)（排除图片语法）
+      .replace(
+        /(?<!\!)(\[[^\]]*\]\()([^)]+)(\))/g,
+        (match, prefix, url, suffix) => {
+          if (!isRelativePath(url)) return match
+          return `${prefix}${resolveUrl(url, fullName, branch, false)}${suffix}`
+        },
       )
   )
 }
@@ -135,7 +202,6 @@ export async function getRepoReadme(
   if (!res.ok) return null
 
   const content = await res.text()
-  const rawBaseUrl = `https://raw.githubusercontent.com/${fullName}/${defaultBranch}`
 
-  return processReadmeContent(content, rawBaseUrl)
+  return processReadmeContent(content, fullName, defaultBranch)
 }
