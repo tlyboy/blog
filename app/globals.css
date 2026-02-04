@@ -9,6 +9,10 @@ html {
   height: 100%;
 }
 
+html[data-scroll-behavior="smooth"] {
+  scroll-behavior: smooth;
+}
+
 body {
   height: 100%;
 }
