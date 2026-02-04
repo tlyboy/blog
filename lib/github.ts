@@ -126,63 +126,68 @@ function resolveUrl(url: string, fullName: string, branch: string, forEmbed: boo
 }
 
 function processReadmeContent(content: string, fullName: string, branch: string): string {
-  return (
-    content
-      // 将 <a><picture>...</picture></a> 转换为两个 img（同时移除 a 标签避免 button 嵌套）
-      .replace(/<a\s[^>]*>\s*<picture>([\s\S]*?)<\/picture>\s*<\/a>/gi, (_, inner) => {
-        const darkMatch = inner.match(/srcset=["']([^"']+)["']/)
-        const lightMatch = inner.match(/<img[\s\S]*?src=["']([^"']+)["']/)
-        const altMatch = inner.match(/alt=["']([^"']*)["']/)
-        if (!darkMatch || !lightMatch) return `<picture>${inner}</picture>`
-        const dark = resolveUrl(darkMatch[1], fullName, branch, true)
-        const light = resolveUrl(lightMatch[1], fullName, branch, true)
-        const alt = altMatch?.[1] || ''
-        return `<img class="block dark:hidden" alt="${alt}" src="${light}" />\n<img class="hidden dark:block" alt="${alt}" src="${dark}" />`
-      })
-      // 处理没有 a 标签包裹的 <picture>
-      .replace(/<picture>([\s\S]*?)<\/picture>/gi, (_, inner) => {
-        const darkMatch = inner.match(/srcset=["']([^"']+)["']/)
-        const lightMatch = inner.match(/<img[\s\S]*?src=["']([^"']+)["']/)
-        const altMatch = inner.match(/alt=["']([^"']*)["']/)
-        if (!darkMatch || !lightMatch) return `<picture>${inner}</picture>`
-        const dark = resolveUrl(darkMatch[1], fullName, branch, true)
-        const light = resolveUrl(lightMatch[1], fullName, branch, true)
-        const alt = altMatch?.[1] || ''
-        return `<img class="block dark:hidden" alt="${alt}" src="${light}" />\n<img class="hidden dark:block" alt="${alt}" src="${dark}" />`
-      })
-      // 处理 HTML src 属性（图片、视频等嵌入资源）
-      .replace(
-        /(src=["'])([^"']+)(["'])/gi,
-        (match, prefix, url, suffix) => {
-          if (!isRelativePath(url)) return match
-          return `${prefix}${getRawUrl(fullName, branch, url)}${suffix}`
-        },
-      )
-      // 处理 HTML href 属性（链接）
-      .replace(
-        /(href=["'])([^"']+)(["'])/gi,
-        (match, prefix, url, suffix) => {
-          if (!isRelativePath(url)) return match
-          return `${prefix}${resolveUrl(url, fullName, branch, false)}${suffix}`
-        },
-      )
-      // 处理 Markdown 图片 ![alt](url)
-      .replace(
-        /(\!\[[^\]]*\]\()([^)]+)(\))/g,
-        (match, prefix, url, suffix) => {
-          if (!isRelativePath(url)) return match
-          return `${prefix}${getRawUrl(fullName, branch, url)}${suffix}`
-        },
-      )
-      // 处理 Markdown 链接 [text](url)（排除图片语法）
-      .replace(
-        /(?<!\!)(\[[^\]]*\]\()([^)]+)(\))/g,
-        (match, prefix, url, suffix) => {
-          if (!isRelativePath(url)) return match
-          return `${prefix}${resolveUrl(url, fullName, branch, false)}${suffix}`
-        },
-      )
-  )
+  // 保护代码块和行内代码，避免替换示例中的路径
+  const codeBlocks: string[] = []
+  const placeholder = '\x00CODE_BLOCK_'
+
+  // 提取代码块（```...```）和行内代码（`...`）
+  let protected_ = content
+    .replace(/```[\s\S]*?```/g, (match) => {
+      codeBlocks.push(match)
+      return `${placeholder}${codeBlocks.length - 1}\x00`
+    })
+    .replace(/`[^`]+`/g, (match) => {
+      codeBlocks.push(match)
+      return `${placeholder}${codeBlocks.length - 1}\x00`
+    })
+
+  // 处理相对路径
+  protected_ = protected_
+    // 将 <a><picture>...</picture></a> 转换为两个 img（同时移除 a 标签避免 button 嵌套）
+    .replace(/<a\s[^>]*>\s*<picture>([\s\S]*?)<\/picture>\s*<\/a>/gi, (_, inner) => {
+      const darkMatch = inner.match(/srcset=["']([^"']+)["']/)
+      const lightMatch = inner.match(/<img[\s\S]*?src=["']([^"']+)["']/)
+      const altMatch = inner.match(/alt=["']([^"']*)["']/)
+      if (!darkMatch || !lightMatch) return `<picture>${inner}</picture>`
+      const dark = resolveUrl(darkMatch[1], fullName, branch, true)
+      const light = resolveUrl(lightMatch[1], fullName, branch, true)
+      const alt = altMatch?.[1] || ''
+      return `<img class="block dark:hidden" alt="${alt}" src="${light}" />\n<img class="hidden dark:block" alt="${alt}" src="${dark}" />`
+    })
+    // 处理没有 a 标签包裹的 <picture>
+    .replace(/<picture>([\s\S]*?)<\/picture>/gi, (_, inner) => {
+      const darkMatch = inner.match(/srcset=["']([^"']+)["']/)
+      const lightMatch = inner.match(/<img[\s\S]*?src=["']([^"']+)["']/)
+      const altMatch = inner.match(/alt=["']([^"']*)["']/)
+      if (!darkMatch || !lightMatch) return `<picture>${inner}</picture>`
+      const dark = resolveUrl(darkMatch[1], fullName, branch, true)
+      const light = resolveUrl(lightMatch[1], fullName, branch, true)
+      const alt = altMatch?.[1] || ''
+      return `<img class="block dark:hidden" alt="${alt}" src="${light}" />\n<img class="hidden dark:block" alt="${alt}" src="${dark}" />`
+    })
+    // 处理 HTML src 属性（图片、视频等嵌入资源）
+    .replace(/(src=["'])([^"']+)(["'])/gi, (match, prefix, url, suffix) => {
+      if (!isRelativePath(url)) return match
+      return `${prefix}${getRawUrl(fullName, branch, url)}${suffix}`
+    })
+    // 处理 HTML href 属性（链接）
+    .replace(/(href=["'])([^"']+)(["'])/gi, (match, prefix, url, suffix) => {
+      if (!isRelativePath(url)) return match
+      return `${prefix}${resolveUrl(url, fullName, branch, false)}${suffix}`
+    })
+    // 处理 Markdown 图片 ![alt](url)
+    .replace(/(\!\[[^\]]*\]\()([^)]+)(\))/g, (match, prefix, url, suffix) => {
+      if (!isRelativePath(url)) return match
+      return `${prefix}${getRawUrl(fullName, branch, url)}${suffix}`
+    })
+    // 处理 Markdown 链接 [text](url)（排除图片语法）
+    .replace(/(?<!\!)(\[[^\]]*\]\()([^)]+)(\))/g, (match, prefix, url, suffix) => {
+      if (!isRelativePath(url)) return match
+      return `${prefix}${resolveUrl(url, fullName, branch, false)}${suffix}`
+    })
+
+  // 还原代码块
+  return protected_.replace(/\x00CODE_BLOCK_(\d+)\x00/g, (_, index) => codeBlocks[parseInt(index)])
 }
 
 export async function getRepoReadme(
