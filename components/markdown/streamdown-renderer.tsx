@@ -21,6 +21,7 @@ import { createMermaidPlugin } from '@streamdown/mermaid'
 import { createMathPlugin } from '@streamdown/math'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
+import rehypeUnwrapImages from 'rehype-unwrap-images'
 import { ExternalLink, X, Copy } from 'lucide-react'
 
 const plugins: PluginConfig = {
@@ -29,7 +30,7 @@ const plugins: PluginConfig = {
   math: createMathPlugin(),
 }
 
-const rehypePlugins = [rehypeRaw, rehypeSlug]
+const rehypePlugins = [rehypeRaw, rehypeUnwrapImages, rehypeSlug]
 
 function LinkSafetyModal({ url, isOpen, onClose, onConfirm }: LinkSafetyModalProps) {
   if (!isOpen || typeof document === 'undefined') return null
@@ -96,6 +97,14 @@ export function StreamdownRenderer({ content, className }: StreamdownRendererPro
         rehypePlugins={rehypePlugins}
         linkSafety={{
           enabled: true,
+          onLinkCheck: (url) => {
+            // 内部链接安全，不弹窗
+            if (url.startsWith('/') || url.startsWith('#')) {
+              return true
+            }
+            // 外部链接需要弹窗
+            return false
+          },
           renderModal: (props) => <LinkSafetyModal {...props} />,
         }}
       >
