@@ -27,7 +27,7 @@ export function ProjectList({ repos }: ProjectListProps) {
 
   return (
     <>
-      <div className="sticky top-20 z-40 mb-6 bg-background/95 backdrop-blur-sm py-2 -mx-4 px-4">
+      <div className="sticky top-20 z-40 mb-6">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -35,7 +35,7 @@ export function ProjectList({ repos }: ProjectListProps) {
             placeholder="搜索项目名称、描述或语言..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10"
+            className="bg-background pl-10 shadow-sm dark:bg-background"
           />
         </div>
       </div>
