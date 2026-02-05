@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
 import { getRepos, getRepo, getRepoReadme } from '@/lib/github'
 import { StreamdownRenderer } from '@/components/markdown/streamdown-renderer'
+import { CopyCloneButton } from '@/components/copy-clone-button'
 import { CopyMarkdownButton } from '@/components/copy-markdown-button'
 import { Button } from '@/components/ui/button'
 
@@ -44,7 +45,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <div className="mx-auto max-w-4xl px-4 py-24">
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Link
           href="/projects"
           className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -53,7 +54,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           返回项目列表
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <CopyCloneButton fullName={repo.full_name} />
           {readme && <CopyMarkdownButton content={readme} />}
           <Button variant="outline" size="sm" asChild>
             <a
