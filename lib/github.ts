@@ -204,11 +204,11 @@ export async function getRepoReadme(
 ): Promise<string | null> {
   if (!token) return null
 
-  // 中文 locale 优先获取中文 README
-  if (locale === 'zh-CN') {
-    const zhContent = await fetchReadmeByName(fullName, 'README.zh-CN.md')
-    if (zhContent) {
-      return processReadmeContent(zhContent, fullName, defaultBranch)
+  // 非默认 locale 优先获取对应语言的 README
+  if (locale && locale !== 'en') {
+    const localizedContent = await fetchReadmeByName(fullName, `README.${locale}.md`)
+    if (localizedContent) {
+      return processReadmeContent(localizedContent, fullName, defaultBranch)
     }
   }
 
