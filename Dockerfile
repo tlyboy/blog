@@ -1,5 +1,8 @@
 FROM node:24-alpine AS build-stage
 
+ARG GITHUB_TOKEN
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
+
 WORKDIR /app
 RUN corepack enable
 

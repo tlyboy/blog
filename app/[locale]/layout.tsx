@@ -27,7 +27,7 @@ export async function generateMetadata({
       template: `%s | ${t('blogTitle', { name })}`,
     },
     description: user?.bio || t('blogDescription', { name }),
-    icons: user?.avatar_url ? [{ url: user.avatar_url }] : undefined,
+    icons: user?.avatar_url ? [{ url: '/api/avatar' }] : undefined,
   }
 }
 
