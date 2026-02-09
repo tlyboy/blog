@@ -1,14 +1,14 @@
 # blog
 
-▲ Guany's blog
+▲ Guany 的博客
 
-## Install
+## 安装
 
 ```bash
 git clone https://github.com/tlyboy/blog.git
 ```
 
-## Usage
+## 使用说明
 
 ```bash
 pnpm install
@@ -16,6 +16,6 @@ pnpm dev
 pnpm build
 ```
 
-## License
+## 使用许可
 
 [MIT](https://opensource.org/licenses/MIT) © Guany
