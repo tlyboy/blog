@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Copy, Check } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { useCopy } from '@/lib/use-copy'
 import { Button } from '@/components/ui/button'
@@ -31,6 +32,8 @@ function getAbsoluteTop(element: HTMLElement): number {
 export function DocsToc({ toc, rawContent }: DocsTocProps) {
   const [activeId, setActiveId] = useState<string>(toc[0]?.id || '')
   const [copied, copy] = useCopy()
+  const t = useTranslations('docs')
+  const tCopy = useTranslations('copy')
 
   useEffect(() => {
     // 标记是否刚点击了 TOC 链接
@@ -110,13 +113,13 @@ export function DocsToc({ toc, rawContent }: DocsTocProps) {
             onClick={() => rawContent && copy(rawContent)}
           >
             {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
-            {copied ? '已复制' : '复制 Markdown'}
+            {copied ? tCopy('copied') : tCopy('copyMarkdown')}
           </Button>
         </div>
       )}
       {toc.length > 0 && (
         <>
-          <h4 className="mb-3 font-semibold">页面导航</h4>
+          <h4 className="mb-3 font-semibold">{t('pageNav')}</h4>
           <nav>
             <ul className="space-y-2 text-sm">
               {toc.map((item, index) => (
@@ -129,7 +132,7 @@ export function DocsToc({ toc, rawContent }: DocsTocProps) {
                     className={cn(
                       'block py-1 transition-colors',
                       activeId === item.id
-                        ? 'font-medium text-primary'
+                        ? 'text-primary'
                         : 'text-muted-foreground hover:text-foreground'
                     )}
                   >

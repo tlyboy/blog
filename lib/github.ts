@@ -1,6 +1,21 @@
-import type { GitHubRepo } from '@/types/github'
+import type { GitHubRepo, GitHubUser } from '@/types/github'
 
 const token = process.env.GITHUB_TOKEN
+
+export async function getUser(): Promise<GitHubUser | null> {
+  if (!token) return null
+
+  try {
+    const res = await fetch('https://api.github.com/user', {
+      headers: { Authorization: `Bearer ${token}` },
+      next: { revalidate: 3600 },
+    })
+    if (!res.ok) return null
+    return res.json()
+  } catch {
+    return null
+  }
+}
 
 // 缓存用户名，避免重复请求
 let cachedUsername: string | null = null
@@ -163,12 +178,41 @@ function processReadmeContent(content: string, fullName: string, branch: string)
   )
 }
 
+async function fetchReadmeByName(
+  fullName: string,
+  filename: string,
+): Promise<string | null> {
+  if (!token) return null
+  const res = await fetch(
+    `https://api.github.com/repos/${fullName}/contents/${filename}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github.raw+json',
+      },
+      next: { revalidate: 600 },
+    },
+  )
+  if (!res.ok) return null
+  return res.text()
+}
+
 export async function getRepoReadme(
   fullName: string,
   defaultBranch: string,
+  locale?: string,
 ): Promise<string | null> {
   if (!token) return null
 
+  // 中文 locale 优先获取中文 README
+  if (locale === 'zh-CN') {
+    const zhContent = await fetchReadmeByName(fullName, 'README.zh-CN.md')
+    if (zhContent) {
+      return processReadmeContent(zhContent, fullName, defaultBranch)
+    }
+  }
+
+  // 回退到默认 README
   const res = await fetch(`https://api.github.com/repos/${fullName}/readme`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -176,10 +220,7 @@ export async function getRepoReadme(
     },
     next: { revalidate: 600 },
   })
-
   if (!res.ok) return null
-
   const content = await res.text()
-
   return processReadmeContent(content, fullName, defaultBranch)
 }

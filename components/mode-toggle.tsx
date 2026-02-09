@@ -1,10 +1,12 @@
 'use client'
 
 import { useTheme } from 'next-themes'
+import { useTranslations } from 'next-intl'
 import { Button } from './ui/button'
 
 export function ModeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
+  const t = useTranslations('nav')
 
   function toggleDark(event: React.MouseEvent<HTMLButtonElement>) {
     const isAppearanceTransition = !window.matchMedia(
@@ -58,7 +60,7 @@ export function ModeToggle() {
       variant="secondary"
       size="icon"
       className="size-8"
-      title="切换深色模式"
+      title={t('toggleTheme')}
       onClick={toggleDark}
     >
       <svg

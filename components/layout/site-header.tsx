@@ -1,9 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { ModeToggle } from '@/components/mode-toggle'
+import { LocaleSwitcher } from '@/components/locale-switcher'
 import { Button } from '@/components/ui/button'
 import { Github, Menu } from 'lucide-react'
 import {
@@ -20,6 +22,7 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ avatar, name }: SiteHeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
+  const t = useTranslations()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +51,7 @@ export function SiteHeader({ avatar, name }: SiteHeaderProps) {
               height={36}
             />
           )}
-          <span className="font-semibold">{name || 'Guany'} 的博客</span>
+          <span className="font-semibold">{t('metadata.blogTitle', { name: name || 'Guany' })}</span>
         </Link>
 
         <nav className="flex items-center gap-2 sm:gap-4">
@@ -56,19 +59,19 @@ export function SiteHeader({ avatar, name }: SiteHeaderProps) {
             href="/projects"
             className="hidden text-muted-foreground transition-colors hover:text-foreground sm:block"
           >
-            项目
+            {t('nav.projects')}
           </Link>
           <Link
             href="/docs"
             className="hidden text-muted-foreground transition-colors hover:text-foreground sm:block"
           >
-            文档
+            {t('nav.docs')}
           </Link>
           <Link
             href="/uses"
             className="hidden text-muted-foreground transition-colors hover:text-foreground sm:block"
           >
-            使用
+            {t('nav.uses')}
           </Link>
 
           <div className="flex items-center gap-1">
@@ -81,13 +84,13 @@ export function SiteHeader({ avatar, name }: SiteHeaderProps) {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <Link href="/projects">项目</Link>
+                  <Link href="/projects">{t('nav.projects')}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/docs">文档</Link>
+                  <Link href="/docs">{t('nav.docs')}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/uses">使用</Link>
+                  <Link href="/uses">{t('nav.uses')}</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -102,6 +105,7 @@ export function SiteHeader({ avatar, name }: SiteHeaderProps) {
                 <Github className="size-4.5" />
               </a>
             </Button>
+            <LocaleSwitcher />
             <ModeToggle />
           </div>
         </nav>

@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { Link, usePathname } from '@/i18n/navigation'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -11,6 +11,7 @@ import { docsConfig } from '@/lib/docs-config'
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
+  const t = useTranslations('docs')
 
   return (
     <div className="lg:hidden">
@@ -27,8 +28,8 @@ export function MobileNav() {
         <div className="fixed inset-x-0 top-16 z-50 h-[calc(100vh-4rem)] overflow-y-auto border-t border-border bg-background p-4">
           <nav className="space-y-6">
             {docsConfig.map((group) => (
-              <div key={`mobile-group-${group.title}`}>
-                <h4 className="mb-2 font-semibold">{group.title}</h4>
+              <div key={`mobile-group-${group.titleKey}`}>
+                <h4 className="mb-2 font-semibold">{t(group.titleKey)}</h4>
                 <ul className="space-y-1">
                   {group.items.map((item) => {
                     const href = `/docs/${item.slug}`
@@ -42,11 +43,11 @@ export function MobileNav() {
                           className={cn(
                             'block rounded-md px-3 py-2 text-sm transition-colors',
                             isActive
-                              ? 'bg-primary/10 font-medium text-primary'
+                              ? 'bg-primary/10 text-primary'
                               : 'text-muted-foreground hover:bg-accent hover:text-foreground'
                           )}
                         >
-                          {item.title}
+                          {t.has(item.titleKey) ? t(item.titleKey) : item.titleKey}
                         </Link>
                       </li>
                     )

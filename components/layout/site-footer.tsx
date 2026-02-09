@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 interface SiteFooterProps {
   avatar?: string
@@ -6,6 +7,8 @@ interface SiteFooterProps {
 }
 
 export function SiteFooter({ avatar, name }: SiteFooterProps) {
+  const t = useTranslations('footer')
+
   return (
     <footer className="border-t border-border px-5 py-8">
       <div className="mx-auto max-w-6xl">
@@ -20,7 +23,7 @@ export function SiteFooter({ avatar, name }: SiteFooterProps) {
           </div>
 
           <div className="text-sm text-muted-foreground">
-            基于 MIT 许可发布
+            {t('license')}
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import type { GitHubRepo } from '@/types/github'
 import { Star, GitFork, ExternalLink } from 'lucide-react'
 
@@ -8,6 +9,8 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ repo, index }: ProjectCardProps) {
+  const t = useTranslations('projects')
+
   return (
     <Link
       href={`/projects/${repo.name}`}
@@ -37,7 +40,7 @@ export function ProjectCard({ repo, index }: ProjectCardProps) {
 
       {/* Description */}
       <p className="line-clamp-2 text-sm text-muted-foreground">
-        {repo.description || '暂无描述'}
+        {repo.description || t('noDescription')}
       </p>
 
       {/* Footer */}
@@ -56,7 +59,7 @@ export function ProjectCard({ repo, index }: ProjectCardProps) {
               window.open(repo.homepage!, '_blank', 'noopener,noreferrer')
             }}
             className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-            title="访问网站"
+            title={t('visitWebsite')}
           >
             <ExternalLink className="size-4" />
           </span>

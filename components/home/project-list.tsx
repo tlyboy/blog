@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { Star, GitFork, Search, ExternalLink } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import type { GitHubRepo } from '@/types/github'
@@ -12,6 +13,7 @@ interface ProjectListProps {
 
 export function ProjectList({ repos }: ProjectListProps) {
   const [search, setSearch] = useState('')
+  const t = useTranslations('projects')
 
   const filteredRepos = useMemo(() => {
     if (!search.trim()) return repos
@@ -32,7 +34,7 @@ export function ProjectList({ repos }: ProjectListProps) {
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             type="text"
-            placeholder="搜索项目名称、描述或语言..."
+            placeholder={t('searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="bg-background pl-10 shadow-sm dark:bg-background"
@@ -42,7 +44,7 @@ export function ProjectList({ repos }: ProjectListProps) {
 
       {filteredRepos.length === 0 ? (
         <p className="text-center text-muted-foreground">
-          {search ? '没有找到匹配的项目' : '暂无项目'}
+          {search ? t('noMatch') : t('noProjects')}
         </p>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
@@ -73,7 +75,7 @@ export function ProjectList({ repos }: ProjectListProps) {
               </div>
 
               <p className="line-clamp-2 flex-1 text-sm text-muted-foreground">
-                {repo.description || '暂无描述'}
+                {repo.description || t('noDescription')}
               </p>
 
               <div className="mt-auto flex items-center justify-between pt-2">
@@ -91,7 +93,7 @@ export function ProjectList({ repos }: ProjectListProps) {
                       window.open(repo.homepage!, '_blank', 'noopener,noreferrer')
                     }}
                     className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                    title="访问网站"
+                    title={t('visitWebsite')}
                   >
                     <ExternalLink className="size-4" />
                   </span>

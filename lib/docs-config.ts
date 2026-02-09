@@ -1,35 +1,35 @@
 export interface DocGroup {
-  title: string
-  items: { title: string; slug: string }[]
+  titleKey: string
+  items: { titleKey: string; slug: string }[]
 }
 
 export const docsConfig: DocGroup[] = [
   {
-    title: '指南',
-    items: [{ title: '简介', slug: 'getting-started' }],
+    titleKey: 'guide',
+    items: [{ titleKey: 'introduction', slug: 'getting-started' }],
   },
   {
-    title: '环境',
+    titleKey: 'environment',
     items: [
-      { title: 'macOS', slug: 'macos' },
-      { title: 'Linux', slug: 'linux' },
-      { title: 'Ubuntu', slug: 'ubuntu' },
-      { title: 'Windows', slug: 'windows' },
-      { title: 'WSL', slug: 'wsl' },
-      { title: 'Zsh', slug: 'zsh' },
-      { title: 'PowerShell', slug: 'powershell' },
-      { title: 'Warp', slug: 'warp' },
-      { title: 'Windows Terminal', slug: 'windows-terminal' },
-      { title: 'VS Code', slug: 'vscode' },
-      { title: 'Git', slug: 'git' },
-      { title: 'SSH', slug: 'ssh' },
-      { title: 'Docker', slug: 'docker' },
-      { title: 'fnm', slug: 'fnm' },
-      { title: 'ni', slug: 'ni' },
-      { title: 'Claude Code', slug: 'claude-code' },
-      { title: 'fastfetch', slug: 'fastfetch' },
-      { title: 'Raycast', slug: 'raycast' },
-      { title: 'ZeroTier', slug: 'zerotier' },
+      { titleKey: 'macOS', slug: 'macos' },
+      { titleKey: 'Linux', slug: 'linux' },
+      { titleKey: 'Ubuntu', slug: 'ubuntu' },
+      { titleKey: 'Windows', slug: 'windows' },
+      { titleKey: 'WSL', slug: 'wsl' },
+      { titleKey: 'Zsh', slug: 'zsh' },
+      { titleKey: 'PowerShell', slug: 'powershell' },
+      { titleKey: 'Warp', slug: 'warp' },
+      { titleKey: 'Windows Terminal', slug: 'windows-terminal' },
+      { titleKey: 'VS Code', slug: 'vscode' },
+      { titleKey: 'Git', slug: 'git' },
+      { titleKey: 'SSH', slug: 'ssh' },
+      { titleKey: 'Docker', slug: 'docker' },
+      { titleKey: 'fnm', slug: 'fnm' },
+      { titleKey: 'ni', slug: 'ni' },
+      { titleKey: 'Claude Code', slug: 'claude-code' },
+      { titleKey: 'fastfetch', slug: 'fastfetch' },
+      { titleKey: 'Raycast', slug: 'raycast' },
+      { titleKey: 'ZeroTier', slug: 'zerotier' },
     ],
   },
 ]

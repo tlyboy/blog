@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import type { GitHubUser } from '@/types/github'
 import { MapPin, BookMarked, Users } from 'lucide-react'
 
@@ -8,6 +9,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ user, backgroundUrl }: HeroSectionProps) {
+  const t = useTranslations('home')
+
   return (
     <section className="relative pt-16">
       {/* Background Image */}
@@ -39,7 +42,7 @@ export function HeroSection({ user, backgroundUrl }: HeroSectionProps) {
 
           {/* Name */}
           <h1 className="mb-3 text-4xl font-bold md:text-5xl">
-            {user?.name || 'Loading...'}
+            {user?.name || 'Guany'}
           </h1>
 
           {/* Bio */}
@@ -60,13 +63,13 @@ export function HeroSection({ user, backgroundUrl }: HeroSectionProps) {
             {user?.public_repos !== undefined && (
               <div className="text-muted-foreground flex items-center gap-1 text-sm">
                 <BookMarked className="size-4" />
-                <span>{user.public_repos} 仓库</span>
+                <span>{t('repos', { count: user.public_repos })}</span>
               </div>
             )}
             {user?.followers !== undefined && (
               <div className="text-muted-foreground flex items-center gap-1 text-sm">
                 <Users className="size-4" />
-                <span>{user.followers} 粉丝</span>
+                <span>{t('followers', { count: user.followers })}</span>
               </div>
             )}
           </div>

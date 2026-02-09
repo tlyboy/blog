@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import type { GitHubRepo } from '@/types/github'
 import { ProjectCard } from './project-card'
 import { ProjectCardSkeleton } from './project-card-skeleton'
@@ -8,6 +9,7 @@ import { ProjectCardSkeleton } from './project-card-skeleton'
 export function ProjectsSection() {
   const [repos, setRepos] = useState<GitHubRepo[]>([])
   const [loading, setLoading] = useState(true)
+  const t = useTranslations('home')
 
   useEffect(() => {
     fetch('/api/github/repos')
@@ -24,7 +26,7 @@ export function ProjectsSection() {
     <section className="px-5 py-16">
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-10 animate-fade-in-up text-center text-2xl font-semibold">
-          我的项目
+          {t('myProjects')}
         </h2>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
