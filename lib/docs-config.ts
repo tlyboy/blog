@@ -30,6 +30,7 @@ export const docsConfig: DocGroup[] = [
       { titleKey: 'fastfetch', slug: 'fastfetch' },
       { titleKey: 'Raycast', slug: 'raycast' },
       { titleKey: 'ZeroTier', slug: 'zerotier' },
+      { titleKey: 'Ollama', slug: 'ollama' },
     ],
   },
 ]
