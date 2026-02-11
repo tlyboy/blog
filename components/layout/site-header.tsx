@@ -7,7 +7,7 @@ import { Link } from '@/i18n/navigation'
 import { ModeToggle } from '@/components/mode-toggle'
 import { LocaleSwitcher } from '@/components/locale-switcher'
 import { Button } from '@/components/ui/button'
-import { Github, Menu } from 'lucide-react'
+import { ChevronDown, Github, Menu } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -73,6 +73,20 @@ export function SiteHeader({ avatar, name }: SiteHeaderProps) {
           >
             {t('nav.uses')}
           </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="hidden items-center gap-0.5 text-muted-foreground transition-colors hover:text-foreground sm:flex">
+              {t('nav.llm')}
+              <ChevronDown className="size-3.5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem asChild>
+                <a href="/llms.txt">llms.txt</a>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <a href="/llms-full.txt">llms-full.txt</a>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <div className="flex items-center gap-1">
             {/* 移动端菜单 */}
@@ -91,6 +105,12 @@ export function SiteHeader({ avatar, name }: SiteHeaderProps) {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/uses">{t('nav.uses')}</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/llms.txt">llms.txt</a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/llms-full.txt">llms-full.txt</a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

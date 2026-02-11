@@ -7,6 +7,7 @@
     "projects": "项目",
     "docs": "文档",
     "uses": "使用",
+    "llm": "LLM",
     "toggleTheme": "切换深色模式"
   },
   "home": {

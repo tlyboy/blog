@@ -7,6 +7,7 @@
     "projects": "Projects",
     "docs": "Docs",
     "uses": "Uses",
+    "llm": "LLM",
     "toggleTheme": "Toggle theme"
   },
   "home": {
