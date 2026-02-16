@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "blogTitle": "{name}'s Blog",
+    "blogDescription": "{name}'s personal blog"
+  },
+  "nav": {
+    "projects": "Projects",
+    "docs": "Docs",
+    "uses": "Uses",
+    "llm": "LLM",
+    "toggleTheme": "Toggle theme"
+  },
+  "home": {
+    "myProjects": "My Projects",
+    "repos": "{count} repos",
+    "followers": "{count} followers"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "My open source projects",
+    "backToList": "Back to projects",
+    "visit": "Visit",
+    "noReadme": "No README available for this project",
+    "notFound": "Project not found",
+    "projectDetails": "{name} project details",
+    "noDescription": "No description",
+    "noProjects": "No projects",
+    "noMatch": "No matching projects found",
+    "searchPlaceholder": "Search by name, description or language...",
+    "visitWebsite": "Visit website",
+    "copied": "Copied",
+    "copyCloneUrl": "Copy clone URL"
+  },
+  "docs": {
+    "title": "Docs",
+    "notFound": "Document not found",
+    "pageNav": "On this page",
+    "guide": "Guide",
+    "introduction": "Introduction",
+    "environment": "Environment"
+  },
+  "uses": {
+    "title": "Uses",
+    "description": "Hardware and tools I use daily"
+  },
+  "md": {
+    "provideLink": "Please provide a markdown link",
+    "fetchFailed": "Failed to fetch content"
+  },
+  "footer": {
+    "license": "Released under MIT License"
+  },
+  "linkSafety": {
+    "title": "Open external link?",
+    "description": "You are about to visit an external website",
+    "copyLink": "Copy link",
+    "openLink": "Open link"
+  },
+  "copy": {
+    "copied": "Copied",
+    "copyMarkdown": "Copy Markdown"
+  }
+}

@@ -1,0 +1,10 @@
+services:
+  blog:
+    build:
+      context: .
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+    restart: unless-stopped
+    env_file: .env.local
+    ports:
+      - 3000:3000

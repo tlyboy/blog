@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "blogTitle": "{name} 的博客",
+    "blogDescription": "{name} 的个人博客"
+  },
+  "nav": {
+    "projects": "项目",
+    "docs": "文档",
+    "uses": "使用",
+    "llm": "LLM",
+    "toggleTheme": "切换深色模式"
+  },
+  "home": {
+    "myProjects": "我的项目",
+    "repos": "{count} 仓库",
+    "followers": "{count} 粉丝"
+  },
+  "projects": {
+    "title": "项目",
+    "description": "我的开源项目列表",
+    "backToList": "返回项目列表",
+    "visit": "访问",
+    "noReadme": "该项目暂无 README",
+    "notFound": "项目未找到",
+    "projectDetails": "{name} 项目详情",
+    "noDescription": "暂无描述",
+    "noProjects": "暂无项目",
+    "noMatch": "没有找到匹配的项目",
+    "searchPlaceholder": "搜索项目名称、描述或语言...",
+    "visitWebsite": "访问网站",
+    "copied": "已复制",
+    "copyCloneUrl": "复制 clone 地址"
+  },
+  "docs": {
+    "title": "文档",
+    "notFound": "文档未找到",
+    "pageNav": "页面导航",
+    "guide": "指南",
+    "introduction": "简介",
+    "environment": "环境"
+  },
+  "uses": {
+    "title": "使用",
+    "description": "我日常使用的硬件设备清单"
+  },
+  "md": {
+    "provideLink": "请提供 markdown 链接",
+    "fetchFailed": "无法获取内容"
+  },
+  "footer": {
+    "license": "基于 MIT 许可发布"
+  },
+  "linkSafety": {
+    "title": "打开外部链接？",
+    "description": "即将访问外部网站",
+    "copyLink": "复制链接",
+    "openLink": "打开链接"
+  },
+  "copy": {
+    "copied": "已复制",
+    "copyMarkdown": "复制 Markdown"
+  }
+}
