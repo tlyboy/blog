@@ -201,26 +201,28 @@ html.dark {
   margin-bottom: 1rem !important;
 }
 
-/* 移除 prose 中 pre 的 margin（Streamdown 代码块内） */
-pre[data-streamdown='code-block-body'] {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+/* 重置 prose 对 streamdown 代码块的样式干扰 */
+/* prose :where(pre) 设置了 color/background/margin/border-radius/line-height 等 */
+/* streamdown pre 只有 p-4/text-sm/bg-[...] 工具类，无法覆盖其余 prose 属性 */
+.prose pre[data-streamdown='code-block-body'] {
+  color: var(--foreground);
+  background: transparent;
+  margin: 0;
+  border-radius: 0;
+  line-height: inherit;
+}
+
+/* Shiki 双主题暗色模式修复 */
+/* Shiki 在 htmlStyle 中设置 inline color（亮色主题），优先级高于 Tailwind dark: 变体 */
+/* 必须用 !important 覆盖 inline style，强制使用 --shiki-dark 变量 */
+html.dark [data-streamdown='code-block-body'] code span {
+  color: var(--shiki-dark, inherit) !important;
 }
 
 /* 代码块容器响应式 - 确保在窄屏幕上可以水平滚动 */
 [data-streamdown='code-block'] {
   max-width: 100%;
   overflow-x: auto;
-}
-
-/* Streamdown code blocks - dark mode support */
-html.dark .streamdown pre {
-  --shiki-color: var(--shiki-dark) !important;
-  --shiki-bg: var(--shiki-dark-bg) !important;
-}
-
-html.dark .streamdown pre span {
-  color: var(--shiki-dark) !important;
 }
 
 /* 隐藏代码块最后的空行 - https://github.com/vercel/streamdown/issues/360 */
