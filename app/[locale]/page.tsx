@@ -4,10 +4,16 @@ import { ProjectsSection } from '@/components/home/projects-section'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { getUser } from '@/lib/github'
 
-async function getWallpaper(): Promise<string | null> {
+const mktMap: Record<string, string> = {
+  en: 'en-US',
+  'zh-cn': 'zh-CN',
+}
+
+async function getWallpaper(locale: string): Promise<string | null> {
+  const mkt = mktMap[locale] || 'en-US'
   try {
     const res = await fetch(
-      'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN',
+      `https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=${mkt}`,
       { next: { revalidate: 3600 } },
     )
     if (!res.ok) return null
@@ -26,7 +32,7 @@ export default async function Home({
   const { locale } = await params
   setRequestLocale(locale)
 
-  const [user, wallpaper] = await Promise.all([getUser(), getWallpaper()])
+  const [user, wallpaper] = await Promise.all([getUser(), getWallpaper(locale)])
 
   return (
     <>

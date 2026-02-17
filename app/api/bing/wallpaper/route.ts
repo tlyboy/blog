@@ -1,9 +1,17 @@
-import { NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import type { BingWallpaperResponse } from '@/types/bing'
 
-export async function GET() {
+const mktMap: Record<string, string> = {
+  en: 'en-US',
+  'zh-cn': 'zh-CN',
+}
+
+export async function GET(request: NextRequest) {
+  const locale = request.nextUrl.searchParams.get('locale') || 'en'
+  const mkt = mktMap[locale] || 'en-US'
+
   const res = await fetch(
-    'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN',
+    `https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=${mkt}`,
     {
       next: { revalidate: 3600 }, // 缓存 1 小时
     },
