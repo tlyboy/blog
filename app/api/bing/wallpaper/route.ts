@@ -1,14 +1,14 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import type { BingWallpaperResponse } from '@/types/bing'
 
-const mktMap: Record<string, string> = {
-  en: 'en-US',
-  'zh-cn': 'zh-CN',
+function toMkt(locale: string): string {
+  const { language, region } = new Intl.Locale(locale).maximize()
+  return `${language}-${region}`
 }
 
 export async function GET(request: NextRequest) {
   const locale = request.nextUrl.searchParams.get('locale') || 'en'
-  const mkt = mktMap[locale] || 'en-US'
+  const mkt = toMkt(locale)
 
   const res = await fetch(
     `https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=${mkt}`,

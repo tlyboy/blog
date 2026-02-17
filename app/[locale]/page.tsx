@@ -4,13 +4,13 @@ import { ProjectsSection } from '@/components/home/projects-section'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { getUser } from '@/lib/github'
 
-const mktMap: Record<string, string> = {
-  en: 'en-US',
-  'zh-cn': 'zh-CN',
+function toMkt(locale: string): string {
+  const { language, region } = new Intl.Locale(locale).maximize()
+  return `${language}-${region}`
 }
 
 async function getWallpaper(locale: string): Promise<string | null> {
-  const mkt = mktMap[locale] || 'en-US'
+  const mkt = toMkt(locale)
   try {
     const res = await fetch(
       `https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=${mkt}`,

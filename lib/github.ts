@@ -274,11 +274,9 @@ export async function getRepoReadme(
   if (!token) return null
 
   // 非默认 locale 优先获取对应语言的 README
-  // locale 在 URL 中为小写 (zh-cn)，但 README 文件名使用标准格式 (zh-CN)
+  // Intl.Locale 自动标准化大小写: zh-cn → zh-CN
   if (locale && locale !== 'en') {
-    const readmeLocale = locale.replace(/-(\w+)$/, (_, region: string) =>
-      `-${region.toUpperCase()}`,
-    )
+    const readmeLocale = new Intl.Locale(locale).toString()
     const localizedContent = await fetchReadmeByName(
       fullName,
       `README.${readmeLocale}.md`,
