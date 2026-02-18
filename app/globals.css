@@ -212,6 +212,24 @@ html.dark {
   line-height: inherit;
 }
 
+/* 修复水平溢出时 padding 被吃掉的问题 */
+/* overflow:auto 容器的末端 padding 不在滚动区域内 */
+/* 参考 streamdown 官方做法：水平 padding 放在行元素上，跟随内容滚动 */
+pre[data-streamdown='code-block-body'] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+pre[data-streamdown='code-block-body'] code {
+  display: block;
+  min-width: max-content;
+}
+
+pre[data-streamdown='code-block-body'] code > span {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 /* Shiki 双主题暗色模式修复 */
 /* Shiki 在 htmlStyle 中设置 inline color（亮色主题），优先级高于 Tailwind dark: 变体 */
 /* 必须用 !important 覆盖 inline style，强制使用 --shiki-dark 变量 */
