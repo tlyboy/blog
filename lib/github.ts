@@ -58,7 +58,7 @@ export async function getRepos(): Promise<GitHubRepo[]> {
     'https://api.github.com/user/repos?sort=pushed&per_page=100&affiliation=owner',
     {
       headers: { Authorization: `Bearer ${token}` },
-      next: { revalidate: 600 },
+      next: { revalidate: 1800 },
     },
   )
 
@@ -79,7 +79,7 @@ export async function getRepo(name: string): Promise<GitHubRepo | null> {
 
   const res = await fetch(`https://api.github.com/repos/${username}/${name}`, {
     headers: { Authorization: `Bearer ${token}` },
-    next: { revalidate: 600 },
+    next: { revalidate: 1800 },
   })
 
   if (!res.ok) return null
@@ -259,7 +259,7 @@ async function fetchReadmeByName(
         Authorization: `Bearer ${token}`,
         Accept: 'application/vnd.github.raw+json',
       },
-      next: { revalidate: 600 },
+      next: { revalidate: 3600 },
     },
   )
   if (!res.ok) return null
@@ -292,7 +292,7 @@ export async function getRepoReadme(
       Authorization: `Bearer ${token}`,
       Accept: 'application/vnd.github.raw+json',
     },
-    next: { revalidate: 600 },
+    next: { revalidate: 3600 },
   })
   if (!res.ok) return null
   const content = await res.text()

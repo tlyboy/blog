@@ -1,5 +1,7 @@
 import { buildLlmsContent } from '@/lib/llms-content'
 
+export const revalidate = 3600
+
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ locale: string }> },

@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
   return new NextResponse(new Uint8Array(png), {
     headers: {
       'Content-Type': 'image/png',
-      'Cache-Control': 'public, max-age=3600',
+      'Cache-Control': 'public, max-age=86400',
     },
   })
 }
