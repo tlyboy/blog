@@ -13,14 +13,15 @@ export default async function Home({
   const { locale } = await params
   setRequestLocale(locale)
 
-  const [user, wallpaper] = await Promise.all([
-    getUser(),
-    getHeroBackground(locale),
-  ])
+  const [user, hero] = await Promise.all([getUser(), getHeroBackground(locale)])
 
   return (
     <>
-      <HeroSection user={user} backgroundUrl={wallpaper || undefined} />
+      <HeroSection
+        user={user}
+        backgroundUrl={hero?.url}
+        backgroundPosition={hero?.position}
+      />
       <ProjectsSection />
       <SiteFooter avatar={user?.avatar_url} name={user?.name || undefined} />
     </>

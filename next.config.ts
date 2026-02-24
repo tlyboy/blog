@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   output: 'standalone',
   images: {
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: 'https',

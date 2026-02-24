@@ -1,4 +1,4 @@
-import type { BlogConfig } from '@/types/hero'
+import type { BlogConfig, HeroBackground } from '@/types/hero'
 import { toMkt } from '@/lib/locale'
 import { getR2PublicUrl } from '@/lib/r2'
 
@@ -33,16 +33,19 @@ async function getBingWallpaper(locale: string): Promise<string | null> {
 
 export async function getHeroBackground(
   locale: string,
-): Promise<string | null> {
+): Promise<HeroBackground | null> {
   const config = await fetchBlogConfig()
 
   if (config?.hero?.mode === 'custom' && config.hero.custom?.url) {
-    const url = config.hero.custom.url
-    if (url.startsWith('https://') || url.startsWith('http://')) {
-      return url
-    }
-    return getR2PublicUrl(url)
+    const rawUrl = config.hero.custom.url
+    const url =
+      rawUrl.startsWith('https://') || rawUrl.startsWith('http://')
+        ? rawUrl
+        : getR2PublicUrl(rawUrl)
+    return { url, position: config.hero.custom.position || 'center' }
   }
 
-  return getBingWallpaper(locale)
+  const url = await getBingWallpaper(locale)
+  if (!url) return null
+  return { url, position: 'center' }
 }

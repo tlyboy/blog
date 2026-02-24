@@ -6,9 +6,14 @@ import { MapPin, BookMarked, Users } from 'lucide-react'
 interface HeroSectionProps {
   user: GitHubUser | null
   backgroundUrl?: string
+  backgroundPosition?: string
 }
 
-export function HeroSection({ user, backgroundUrl }: HeroSectionProps) {
+export function HeroSection({
+  user,
+  backgroundUrl,
+  backgroundPosition = 'center',
+}: HeroSectionProps) {
   const t = useTranslations('home')
 
   return (
@@ -16,8 +21,11 @@ export function HeroSection({ user, backgroundUrl }: HeroSectionProps) {
       {/* Background Image */}
       {backgroundUrl && (
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${backgroundUrl})` }}
+          className="absolute inset-0 bg-cover bg-no-repeat"
+          style={{
+            backgroundImage: `url(${backgroundUrl})`,
+            backgroundPosition,
+          }}
         />
       )}
 
