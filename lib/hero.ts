@@ -1,9 +1,9 @@
 import type { BlogConfig, HeroBackground } from '@/types/hero'
 import { toMkt } from '@/lib/locale'
-import { getR2PublicUrl } from '@/lib/r2'
+import { getPublicUrl } from '@/lib/s3'
 
 async function fetchBlogConfig(): Promise<BlogConfig | null> {
-  const domain = process.env.R2_PUBLIC_DOMAIN
+  const domain = process.env.S3_PUBLIC_DOMAIN
   if (!domain) return null
   try {
     const res = await fetch(`https://${domain}/config/blog.json`, {
@@ -41,7 +41,7 @@ export async function getHeroBackground(
     const url =
       rawUrl.startsWith('https://') || rawUrl.startsWith('http://')
         ? rawUrl
-        : getR2PublicUrl(rawUrl)
+        : getPublicUrl(rawUrl)
     return { url, position: config.hero.custom.position || 'center' }
   }
 

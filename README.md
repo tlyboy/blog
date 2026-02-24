@@ -28,10 +28,40 @@ pnpm build
 cp .env.example .env.local
 ```
 
-| Variable           | Required | Description                                            |
-| ------------------ | -------- | ------------------------------------------------------ |
-| `GITHUB_TOKEN`     | Yes      | GitHub personal access token                           |
-| `R2_PUBLIC_DOMAIN` | No       | Cloudflare R2 public domain for Hero background config |
+| Variable           | Required | Description                                                    |
+| ------------------ | -------- | -------------------------------------------------------------- |
+| `GITHUB_TOKEN`     | Yes      | GitHub personal access token                                   |
+| `S3_PUBLIC_DOMAIN` | No       | S3-compatible storage public domain for Hero background config |
+
+### Hero Background Config
+
+When `S3_PUBLIC_DOMAIN` is set, the app reads `config/blog.json` from the storage to determine the Hero background. Falls back to Bing daily wallpaper if not configured.
+
+```json
+{
+  "hero": {
+    "mode": "bing"
+  }
+}
+```
+
+```json
+{
+  "hero": {
+    "mode": "custom",
+    "custom": {
+      "url": "img/background.webp",
+      "position": "top"
+    }
+  }
+}
+```
+
+| Field                  | Description                                         |
+| ---------------------- | --------------------------------------------------- |
+| `hero.mode`            | `"bing"` or `"custom"`                              |
+| `hero.custom.url`      | Relative path to storage root or absolute URL       |
+| `hero.custom.position` | CSS `background-position` value, default `"center"` |
 
 ## License
 
