@@ -1,10 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import type { BingWallpaperResponse } from '@/types/bing'
-
-function toMkt(locale: string): string {
-  const { language, region } = new Intl.Locale(locale).maximize()
-  return `${language}-${region}`
-}
+import { toMkt } from '@/lib/locale'
 
 export async function GET(request: NextRequest) {
   const locale = request.nextUrl.searchParams.get('locale') || 'en'

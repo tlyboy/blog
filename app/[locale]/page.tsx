@@ -3,26 +3,7 @@ import { HeroSection } from '@/components/home/hero-section'
 import { ProjectsSection } from '@/components/home/projects-section'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { getUser } from '@/lib/github'
-
-function toMkt(locale: string): string {
-  const { language, region } = new Intl.Locale(locale).maximize()
-  return `${language}-${region}`
-}
-
-async function getWallpaper(locale: string): Promise<string | null> {
-  const mkt = toMkt(locale)
-  try {
-    const res = await fetch(
-      `https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=${mkt}`,
-      { next: { revalidate: 3600 } },
-    )
-    if (!res.ok) return null
-    const data = await res.json()
-    return `https://www.bing.com${data.images[0].url}`
-  } catch {
-    return null
-  }
-}
+import { getHeroBackground } from '@/lib/hero'
 
 export default async function Home({
   params,
@@ -32,7 +13,10 @@ export default async function Home({
   const { locale } = await params
   setRequestLocale(locale)
 
-  const [user, wallpaper] = await Promise.all([getUser(), getWallpaper(locale)])
+  const [user, wallpaper] = await Promise.all([
+    getUser(),
+    getHeroBackground(locale),
+  ])
 
   return (
     <>
