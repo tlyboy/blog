@@ -6,7 +6,7 @@
 - **UI** — shadcn/ui + Tailwind CSS 4
 - **内容** — Streamdown
 - **国际化** — next-intl
-- **部署** — Vercel
+- **部署** — Vercel / Netlify / Docker
 
 ## 安装
 
