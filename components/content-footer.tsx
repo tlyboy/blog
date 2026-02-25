@@ -28,7 +28,7 @@ export async function ContentFooter({
 
   return (
     <>
-      <div className="flex items-center justify-between text-sm">
+      <div className="flex flex-col gap-2 text-sm sm:flex-row sm:items-center sm:justify-between">
         <EditOnGitHub url={editUrl} locale={locale} />
         {lastUpdated && (
           <span className="text-muted-foreground">
