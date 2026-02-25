@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { Link, usePathname } from '@/i18n/navigation'
+import { Link } from '@/i18n/navigation'
 import { Star, GitFork, Search, ExternalLink } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import type { GitHubRepo } from '@/types/github'
@@ -15,8 +15,6 @@ interface ProjectListProps {
 export function ProjectList({ repos, initialKeyword = '' }: ProjectListProps) {
   const [search, setSearch] = useState(initialKeyword)
   const t = useTranslations('projects')
-  const pathname = usePathname()
-
   function handleSearchChange(value: string) {
     setSearch(value)
     const params = new URLSearchParams()
@@ -24,7 +22,7 @@ export function ProjectList({ repos, initialKeyword = '' }: ProjectListProps) {
       params.set('keyword', value)
     }
     const query = params.toString()
-    window.history.replaceState(null, '', `${pathname}${query ? `?${query}` : ''}`)
+    window.history.replaceState(null, '', `${window.location.pathname}${query ? `?${query}` : ''}`)
   }
 
   const filteredRepos = search.trim()
