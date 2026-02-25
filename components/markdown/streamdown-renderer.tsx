@@ -1,6 +1,6 @@
 'use client'
 
-import { useSyncExternalStore } from 'react'
+import { useEffect, useRef, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import { useTheme } from 'next-themes'
 
@@ -99,13 +99,50 @@ export function StreamdownRenderer({
   className,
 }: StreamdownRendererProps) {
   const mounted = useMounted()
+  const containerRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
   const trimmedContent = content.trim().replace(/\n{3,}/g, '\n\n')
   // SSR 时使用 'default'，客户端 mounted 后才使用实际主题
   const mermaidTheme = mounted && resolvedTheme === 'dark' ? 'dark' : 'default'
 
+  // 根据 header 实际高度 + 标题 marginTop 动态设置 scroll-margin-top
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    let hashHandled = false
+
+    const applyScrollMargins = () => {
+      const header = document.querySelector('header')
+      const headerHeight = header?.offsetHeight ?? 64
+      const headings = container.querySelectorAll<HTMLElement>(
+        'h2[id], h3[id], h4[id], h5[id], h6[id]',
+      )
+      for (const h of headings) {
+        if (h.style.scrollMarginTop) continue
+        const marginTop = parseFloat(getComputedStyle(h).marginTop) || 0
+        h.style.scrollMarginTop = `${headerHeight + marginTop}px`
+      }
+      // 补偿首次 hash 导航
+      if (!hashHandled && headings.length > 0) {
+        hashHandled = true
+        const hash = decodeURIComponent(window.location.hash.slice(1))
+        if (hash) {
+          const target = document.getElementById(hash)
+          if (target) target.scrollIntoView()
+        }
+      }
+    }
+
+    applyScrollMargins()
+    // Streamdown 可能异步渲染或替换 DOM，持续监听
+    const observer = new MutationObserver(applyScrollMargins)
+    observer.observe(container, { childList: true, subtree: true })
+    return () => observer.disconnect()
+  }, [content])
+
   return (
-    <div className={className}>
+    <div ref={containerRef} className={className}>
       <Streamdown
         key={mermaidTheme}
         plugins={plugins}
