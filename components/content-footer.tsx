@@ -34,9 +34,16 @@ export async function ContentFooter({
           <span className="text-muted-foreground">
             {t('lastUpdated')}:{' '}
             <time dateTime={lastUpdated}>
-              {new Date(lastUpdated).toLocaleDateString(
-                locale === 'zh-cn' ? 'zh-CN' : 'en-US',
-                { year: 'numeric', month: 'long', day: 'numeric' },
+              {new Date(lastUpdated).toLocaleString(
+                new Intl.Locale(locale).toString(),
+                {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit',
+                },
               )}
             </time>
           </span>
