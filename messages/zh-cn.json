@@ -59,5 +59,11 @@
   "copy": {
     "copied": "已复制",
     "copyMarkdown": "复制 Markdown"
+  },
+  "common": {
+    "editOnGitHub": "在 GitHub 上编辑此页",
+    "lastUpdated": "最后更新于",
+    "prevPage": "上一页",
+    "nextPage": "下一页"
   }
 }

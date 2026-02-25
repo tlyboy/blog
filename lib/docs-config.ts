@@ -1,6 +1,11 @@
+export interface DocItem {
+  titleKey: string
+  slug: string
+}
+
 export interface DocGroup {
   titleKey: string
-  items: { titleKey: string; slug: string }[]
+  items: DocItem[]
 }
 
 export const docsConfig: DocGroup[] = [
@@ -34,3 +39,15 @@ export const docsConfig: DocGroup[] = [
     ],
   },
 ]
+
+export function getDocNavigation(slug: string) {
+  const flatItems = docsConfig.flatMap((group) => group.items)
+  const index = flatItems.findIndex((item) => item.slug === slug)
+
+  if (index === -1) return { prev: null, next: null }
+
+  return {
+    prev: index > 0 ? flatItems[index - 1] : null,
+    next: index < flatItems.length - 1 ? flatItems[index + 1] : null,
+  }
+}

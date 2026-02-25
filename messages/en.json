@@ -59,5 +59,11 @@
   "copy": {
     "copied": "Copied",
     "copyMarkdown": "Copy Markdown"
+  },
+  "common": {
+    "editOnGitHub": "Edit this page on GitHub",
+    "lastUpdated": "Last updated",
+    "prevPage": "Previous page",
+    "nextPage": "Next page"
   }
 }

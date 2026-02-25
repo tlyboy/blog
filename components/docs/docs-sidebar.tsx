@@ -10,7 +10,7 @@ export function DocsSidebar() {
   const t = useTranslations('docs')
 
   return (
-    <aside className="fixed top-24 hidden max-h-[calc(100vh-6rem)] w-64 overflow-y-auto lg:left-4 lg:block xl:left-[calc((100vw-80rem)/2+1rem)]">
+    <aside className="fixed top-24 hidden max-h-[calc(100vh-6rem)] w-64 overflow-y-auto pb-8 lg:left-4 lg:block xl:left-[calc((100vw-80rem)/2+1rem)]">
       <nav className="space-y-6">
         {docsConfig.map((group) => (
           <div key={`sidebar-group-${group.titleKey}`}>

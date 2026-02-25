@@ -5,6 +5,7 @@ import { getRepos, getRepo, getRepoReadme } from '@/lib/github'
 import { StreamdownRenderer } from '@/components/markdown/streamdown-renderer'
 import { CopyCloneButton } from '@/components/copy-clone-button'
 import { CopyMarkdownButton } from '@/components/copy-markdown-button'
+import { ContentFooter } from '@/components/content-footer'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/i18n/navigation'
 
@@ -39,11 +40,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   setRequestLocale(locale)
 
   const t = await getTranslations('projects')
-  const repo = await getRepo(slug)
+  const [repo, repos] = await Promise.all([getRepo(slug), getRepos()])
 
   if (!repo) {
     notFound()
   }
+
+  const index = repos.findIndex((r) => r.name === slug)
+  const prevRepo = index > 0 ? repos[index - 1] : null
+  const nextRepo = index < repos.length - 1 ? repos[index + 1] : null
 
   const readme = await getRepoReadme(
     repo.full_name,
@@ -91,6 +96,23 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <p className="text-muted-foreground">{t('noReadme')}</p>
         )}
       </article>
+
+      <div className="mt-16 border-t pt-6">
+        <ContentFooter
+          editUrl={`https://github.com/${repo.full_name}/edit/${repo.default_branch}/${locale !== 'en' ? `README.${new Intl.Locale(locale).toString()}.md` : 'README.md'}`}
+          locale={locale}
+          prev={
+            prevRepo
+              ? { title: prevRepo.name, href: `/projects/${prevRepo.name}` }
+              : null
+          }
+          next={
+            nextRepo
+              ? { title: nextRepo.name, href: `/projects/${nextRepo.name}` }
+              : null
+          }
+        />
+      </div>
     </div>
   )
 }

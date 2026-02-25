@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { execSync } from 'child_process'
 import matter from 'gray-matter'
 import { slugify, customIdRegex } from './rehype-custom-slug'
 
@@ -101,6 +102,26 @@ export function getDocBySlug(
     slug,
     meta: { ...data, title },
     content,
+  }
+}
+
+// 获取文档最后更新时间
+export function getDocLastUpdated(
+  locale: string,
+  slug: string,
+  subDir: string = 'docs',
+): string | null {
+  const mdxPath = path.join(contentDir, locale, subDir, `${slug}.mdx`)
+  const mdPath = path.join(contentDir, locale, subDir, `${slug}.md`)
+  const filePath = fs.existsSync(mdxPath) ? mdxPath : mdPath
+
+  try {
+    const result = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
+      encoding: 'utf8',
+    }).trim()
+    return result || null
+  } catch {
+    return null
   }
 }
 

@@ -4,6 +4,8 @@ import matter from 'gray-matter'
 import { getDocBySlug } from '@/lib/mdx'
 import { StreamdownRenderer } from '@/components/markdown/streamdown-renderer'
 import { CopyMarkdownButton } from '@/components/copy-markdown-button'
+import { ContentFooter } from '@/components/content-footer'
+import { getDocLastUpdated } from '@/lib/mdx'
 
 export async function generateMetadata({
   params,
@@ -42,6 +44,13 @@ export default async function UsesPage({
       <article className="prose prose-neutral dark:prose-invert mx-auto">
         <StreamdownRenderer content={rawContent} />
       </article>
+      <div className="mt-16 border-t pt-6">
+        <ContentFooter
+          editUrl={`https://github.com/tlyboy/blog/edit/main/content/${locale}/pages/uses.md`}
+          locale={locale}
+          lastUpdated={getDocLastUpdated(locale, 'uses', 'pages')}
+        />
+      </div>
     </div>
   )
 }

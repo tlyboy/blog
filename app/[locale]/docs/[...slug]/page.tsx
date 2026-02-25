@@ -3,6 +3,7 @@ import matter from 'gray-matter'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { getDocBySlug, getAllDocs, extractToc } from '@/lib/mdx'
 import { DocsToc } from '@/components/docs/docs-toc'
+import { DocsFooter } from '@/components/docs/docs-footer'
 import { StreamdownRenderer } from '@/components/markdown/streamdown-renderer'
 
 interface DocsPageProps {
@@ -51,6 +52,7 @@ export default async function DocsSlugPage({ params }: DocsPageProps) {
       <article className="prose prose-neutral dark:prose-invert max-w-none min-w-0 xl:mr-64">
         <StreamdownRenderer content={rawContent} />
       </article>
+      <DocsFooter slug={slugPath} locale={locale} />
       <DocsToc toc={toc} rawContent={rawContent} />
     </>
   )
