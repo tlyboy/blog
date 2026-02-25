@@ -22,7 +22,11 @@ export function ProjectList({ repos, initialKeyword = '' }: ProjectListProps) {
       params.set('keyword', value)
     }
     const query = params.toString()
-    window.history.replaceState(null, '', `${window.location.pathname}${query ? `?${query}` : ''}`)
+    window.history.replaceState(
+      null,
+      '',
+      `${window.location.pathname}${query ? `?${query}` : ''}`,
+    )
   }
 
   const filteredRepos = search.trim()

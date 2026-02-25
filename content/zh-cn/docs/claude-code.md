@@ -16,12 +16,11 @@ Claude Code
     "pr": ""
   },
   "enabledPlugins": {
-    "commit-commands@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "ralph-loop@claude-plugins-official": true,
-    "document-skills@anthropic-agent-skills": true
+    "context7@claude-plugins-official": true
   },
-  "language": "chinese"
+  "language": "chinese",
+  "skipDangerousModePermissionPrompt": true
 }
 ```
 
