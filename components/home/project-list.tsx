@@ -1,31 +1,42 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { Link } from '@/i18n/navigation'
+import { Link, usePathname } from '@/i18n/navigation'
 import { Star, GitFork, Search, ExternalLink } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import type { GitHubRepo } from '@/types/github'
 
 interface ProjectListProps {
   repos: GitHubRepo[]
+  initialKeyword?: string
 }
 
-export function ProjectList({ repos }: ProjectListProps) {
-  const [search, setSearch] = useState('')
+export function ProjectList({ repos, initialKeyword = '' }: ProjectListProps) {
+  const [search, setSearch] = useState(initialKeyword)
   const t = useTranslations('projects')
+  const pathname = usePathname()
 
-  const filteredRepos = useMemo(() => {
-    if (!search.trim()) return repos
+  function handleSearchChange(value: string) {
+    setSearch(value)
+    const params = new URLSearchParams()
+    if (value.trim()) {
+      params.set('keyword', value)
+    }
+    const query = params.toString()
+    window.history.replaceState(null, '', `${pathname}${query ? `?${query}` : ''}`)
+  }
 
-    const query = search.toLowerCase()
-    return repos.filter(
-      (repo) =>
-        repo.name.toLowerCase().includes(query) ||
-        repo.description?.toLowerCase().includes(query) ||
-        repo.language?.toLowerCase().includes(query),
-    )
-  }, [repos, search])
+  const filteredRepos = search.trim()
+    ? repos.filter((repo) => {
+        const query = search.toLowerCase()
+        return (
+          repo.name.toLowerCase().includes(query) ||
+          repo.description?.toLowerCase().includes(query) ||
+          repo.language?.toLowerCase().includes(query)
+        )
+      })
+    : repos
 
   return (
     <>
@@ -36,7 +47,7 @@ export function ProjectList({ repos }: ProjectListProps) {
             type="text"
             placeholder={t('searchPlaceholder')}
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => handleSearchChange(e.target.value)}
             className="bg-background dark:bg-background pl-10 shadow-sm"
           />
         </div>

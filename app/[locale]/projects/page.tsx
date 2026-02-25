@@ -17,11 +17,16 @@ export async function generateMetadata({
 
 export default async function ProjectsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+
+  const { keyword } = await searchParams
+  const initialKeyword = typeof keyword === 'string' ? keyword : ''
 
   const repos = await getRepos()
 
@@ -30,7 +35,7 @@ export default async function ProjectsPage({
       <h1 className="mb-8 text-3xl font-bold">
         <ProjectsTitle />
       </h1>
-      <ProjectList repos={repos} />
+      <ProjectList repos={repos} initialKeyword={initialKeyword} />
     </div>
   )
 }
