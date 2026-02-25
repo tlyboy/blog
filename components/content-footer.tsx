@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
 import { EditOnGitHub } from '@/components/edit-on-github'
+import { LocaleTime } from '@/components/locale-time'
 
 export interface NavItem {
   title: string
@@ -33,19 +34,7 @@ export async function ContentFooter({
         {lastUpdated && (
           <span className="text-muted-foreground">
             {t('lastUpdated')}:{' '}
-            <time dateTime={lastUpdated}>
-              {new Date(lastUpdated).toLocaleString(
-                new Intl.Locale(locale).toString(),
-                {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  second: '2-digit',
-                },
-              )}
-            </time>
+            <LocaleTime date={lastUpdated} locale={locale} />
           </span>
         )}
       </div>
