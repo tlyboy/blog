@@ -23,6 +23,7 @@ import {
 import { createCodePlugin } from '@streamdown/code'
 import { createMermaidPlugin } from '@streamdown/mermaid'
 import { createMathPlugin } from '@streamdown/math'
+import { createCjkPlugin } from '@streamdown/cjk'
 import rehypeRaw from 'rehype-raw'
 import { rehypeCustomSlug } from '@/lib/rehype-custom-slug'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
@@ -33,6 +34,7 @@ const plugins: PluginConfig = {
   code: createCodePlugin({ themes: ['vitesse-light', 'vitesse-dark'] }),
   mermaid: createMermaidPlugin(),
   math: createMathPlugin(),
+  cjk: createCjkPlugin(),
 }
 
 const rehypePlugins = [rehypeRaw, rehypeUnwrapImages, rehypeCustomSlug]
@@ -92,11 +94,17 @@ function LinkSafetyModal({
 interface StreamdownRendererProps {
   content: string
   className?: string
+  /** 渲染模式，默认 static，后续 AI 功能可传 streaming */
+  mode?: 'streaming' | 'static'
+  /** 渲染不可信内容时启用，使用 Streamdown 默认的安全 rehype 插件 */
+  untrusted?: boolean
 }
 
 export function StreamdownRenderer({
   content,
   className,
+  mode = 'static',
+  untrusted = false,
 }: StreamdownRendererProps) {
   const mounted = useMounted()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -144,10 +152,11 @@ export function StreamdownRenderer({
   return (
     <div ref={containerRef} className={className}>
       <Streamdown
+        mode={mode}
         key={mermaidTheme}
         plugins={plugins}
         mermaid={{ config: { theme: mermaidTheme } }}
-        rehypePlugins={rehypePlugins}
+        rehypePlugins={untrusted ? undefined : rehypePlugins}
         linkSafety={{
           enabled: true,
           onLinkCheck: (url) => {
