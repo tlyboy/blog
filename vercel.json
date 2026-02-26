@@ -1,4 +1,5 @@
 {
   "buildCommand": "pnpm run build",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "regions": ["sin1"]
 }
