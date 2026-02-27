@@ -48,7 +48,7 @@ pnpm build
 
 ### 外链追踪
 
-配置 `TO_API_URL` 和 `TO_API_KEY` 后，文章中的外链会通过 `/api/to` 代理到 to 短链服务以获取点击统计。未配置时直接跳转。
+配置 `TO_API_URL` 和 `TO_API_KEY` 后，文章中的外链会通过 [to](https://github.com/tlyboy/to) 短链服务进行点击追踪。API 密钥在 to 工作区设置中创建。未配置时直接跳转。
 
 ### Hero 背景图配置
 

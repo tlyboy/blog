@@ -48,7 +48,7 @@ pnpm build
 
 ### External Link Tracking
 
-When `TO_API_URL` and `TO_API_KEY` are set, external links in articles go through `/api/to` which proxies to the to short link service for click analytics. Falls back to direct redirect if not configured.
+When `TO_API_URL` and `TO_API_KEY` are set, external links in articles are redirected through the [to](https://github.com/tlyboy/to) short link service for click tracking. Create an API key in the to workspace settings. Falls back to direct link if not configured.
 
 ### Hero Background Config
 
