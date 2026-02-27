@@ -26,6 +26,7 @@ import { createMathPlugin } from '@streamdown/math'
 import { createCjkPlugin } from '@streamdown/cjk'
 import rehypeRaw from 'rehype-raw'
 import { rehypeCustomSlug } from '@/lib/rehype-custom-slug'
+import { rehypeExternalLinkProxy } from '@/lib/rehype-external-link-proxy'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import { useTranslations } from 'next-intl'
 import { ExternalLink, X, Copy } from 'lucide-react'
@@ -37,7 +38,12 @@ const plugins: PluginConfig = {
   cjk: createCjkPlugin(),
 }
 
-const rehypePlugins = [rehypeRaw, rehypeUnwrapImages, rehypeCustomSlug]
+const rehypePlugins = [
+  rehypeRaw,
+  rehypeUnwrapImages,
+  rehypeCustomSlug,
+  rehypeExternalLinkProxy,
+]
 
 function LinkSafetyModal({
   url,
@@ -160,14 +166,19 @@ export function StreamdownRenderer({
         linkSafety={{
           enabled: true,
           onLinkCheck: (url) => {
-            // 内部链接安全，不弹窗
-            if (url.startsWith('/') || url.startsWith('#')) {
-              return true
-            }
-            // 外部链接需要弹窗
+            // 内部链接和代理链接直接放行
+            if (url.startsWith('/') || url.startsWith('#')) return true
+            // 未被改写的外部链接弹窗
             return false
           },
-          renderModal: (props) => <LinkSafetyModal {...props} />,
+          renderModal: ({ url, isOpen, onClose, onConfirm }) => (
+            <LinkSafetyModal
+              url={url}
+              isOpen={isOpen}
+              onClose={onClose}
+              onConfirm={onConfirm}
+            />
+          ),
         }}
       >
         {trimmedContent}

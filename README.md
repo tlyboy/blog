@@ -2,24 +2,21 @@
 
 ▲ Guany's blog
 
-- **Framework** — Next.js 16 (App Router)
-- **UI** — shadcn/ui + Tailwind CSS 4
-- **Content** — Streamdown
-- **I18n** — next-intl
-- **Deploy** — Vercel / Netlify / Docker
+
+| Category  | Stack                    |
+| --------- | ------------------------ |
+| Framework | Next.js 16 (App Router)  |
+| UI        | shadcn/ui + Tailwind CSS 4 |
+| Content   | Streamdown               |
+| I18n      | next-intl                |
+| Deploy    | Vercel / Netlify / Docker |
 
 ## Install
 
 ```bash
 git clone https://github.com/tlyboy/blog.git
-```
-
-## Usage
-
-```bash
+cd blog
 pnpm install
-pnpm dev
-pnpm build
 ```
 
 ### Environment Variables
@@ -32,6 +29,26 @@ cp .env.example .env.local
 | ------------------ | -------- | -------------------------------------------------------------- |
 | `GITHUB_TOKEN`     | Yes      | GitHub personal access token                                   |
 | `S3_PUBLIC_DOMAIN` | No       | S3-compatible storage public domain for Hero background config |
+| `TO_API_URL`       | No       | to short link service API base URL                             |
+| `TO_API_KEY`       | No       | to API key for external link tracking                          |
+
+## Usage
+
+### Development
+
+```bash
+pnpm dev
+```
+
+### Build
+
+```bash
+pnpm build
+```
+
+### External Link Tracking
+
+When `TO_API_URL` and `TO_API_KEY` are set, external links in articles go through `/api/to` which proxies to the to short link service for click analytics. Falls back to direct redirect if not configured.
 
 ### Hero Background Config
 
