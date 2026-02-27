@@ -2,14 +2,13 @@
 
 ▲ Guany's blog
 
-
-| Category  | Stack                    |
-| --------- | ------------------------ |
-| Framework | Next.js 16 (App Router)  |
+| Category  | Stack                      |
+| --------- | -------------------------- |
+| Framework | Next.js 16 (App Router)    |
 | UI        | shadcn/ui + Tailwind CSS 4 |
-| Content   | Streamdown               |
-| I18n      | next-intl                |
-| Deploy    | Vercel / Netlify / Docker |
+| Content   | Streamdown                 |
+| I18n      | next-intl                  |
+| Deploy    | Vercel / Netlify / Docker  |
 
 ## Install
 
@@ -48,7 +47,7 @@ pnpm build
 
 ### External Link Tracking
 
-When `TO_API_URL` and `TO_API_KEY` are set, external links in articles are redirected through the [to](https://github.com/tlyboy/to) short link service for click tracking. Create an API key in the to workspace settings. Falls back to direct link if not configured.
+When `TO_API_URL` and `TO_API_KEY` are set, external links in articles are redirected through the to short link service for click tracking. Create an API key in the to workspace settings. Falls back to direct link if not configured.
 
 ### Hero Background Config
 
