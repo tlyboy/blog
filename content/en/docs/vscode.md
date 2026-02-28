@@ -22,6 +22,7 @@ VS Code
   },
   "files.simpleDialog.enable": true,
   "git.openRepositoryInParentFolders": "always",
+  "github.gitProtocol": "ssh",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "gitlens.graph.layout": "editor",
