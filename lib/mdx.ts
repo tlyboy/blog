@@ -115,7 +115,6 @@ export function getDocLastUpdated(
   const mdPath = path.join(contentDir, locale, subDir, `${slug}.md`)
   const filePath = fs.existsSync(mdxPath) ? mdxPath : mdPath
 
-  // 优先使用 git log，Vercel shallow clone 可能失败则回退到文件 mtime
   try {
     const result = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
       encoding: 'utf8',
@@ -125,11 +124,7 @@ export function getDocLastUpdated(
     // ignore
   }
 
-  try {
-    return fs.statSync(filePath).mtime.toISOString()
-  } catch {
-    return null
-  }
+  return null
 }
 
 // 从文档内容提取目录
