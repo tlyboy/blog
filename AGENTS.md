@@ -7,7 +7,6 @@ This file provides guidance to AI agents when working with code in this reposito
 ```bash
 pnpm dev      # Start development server
 pnpm build    # Build production version
-pnpm lint     # Run ESLint checks
 pnpm start    # Start production server
 ```
 
