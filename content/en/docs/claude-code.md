@@ -15,11 +15,32 @@ Config file location:
     "commit": "",
     "pr": ""
   },
-  "enabledPlugins": {
-    "code-simplifier@claude-plugins-official": true,
-    "context7@claude-plugins-official": true
-  },
   "skipDangerousModePermissionPrompt": true
+}
+```
+
+## MCP Servers
+
+Config file location: `~/.claude.json`
+
+```json
+{
+  "mcpServers": {
+    "codex": {
+      "command": "codex",
+      "args": ["mcp-server"]
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "shadcn": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    }
+  }
 }
 ```
 

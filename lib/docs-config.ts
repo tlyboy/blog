@@ -32,6 +32,7 @@ export const docsConfig: DocGroup[] = [
       { titleKey: 'fnm', slug: 'fnm' },
       { titleKey: 'ni', slug: 'ni' },
       { titleKey: 'Claude Code', slug: 'claude-code' },
+      { titleKey: 'Codex', slug: 'codex' },
       { titleKey: 'fastfetch', slug: 'fastfetch' },
       { titleKey: 'Raycast', slug: 'raycast' },
       { titleKey: 'ZeroTier', slug: 'zerotier' },

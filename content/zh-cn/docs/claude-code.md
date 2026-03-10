@@ -15,12 +15,33 @@ Claude Code
     "commit": "",
     "pr": ""
   },
-  "enabledPlugins": {
-    "code-simplifier@claude-plugins-official": true,
-    "context7@claude-plugins-official": true
-  },
   "language": "chinese",
   "skipDangerousModePermissionPrompt": true
+}
+```
+
+## MCP Servers
+
+配置文件位置：`~/.claude.json`
+
+```json
+{
+  "mcpServers": {
+    "codex": {
+      "command": "codex",
+      "args": ["mcp-server"]
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "shadcn": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    }
+  }
 }
 ```
 
