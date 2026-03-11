@@ -9,15 +9,17 @@ Warp
 **macOS**
 
 ```sh
-mkdir -p $HOME/.warp
-cd $HOME/.warp/
+mkdir -p $HOME/.warp/themes
+git clone https://github.com/HiDeoo/warp-theme-vitesse.git /tmp/warp-theme-vitesse
+cp /tmp/warp-theme-vitesse/*.yaml $HOME/.warp/themes/
 ```
 
 **Windows**
 
 ```powershell
-New-Item -Path "$env:APPDATA\warp\Warp\data\" -ItemType Directory
-Set-Location -Path "$env:APPDATA\warp\Warp\data\"
+New-Item -Path "$env:APPDATA\warp\Warp\data\themes" -ItemType Directory -Force
+git clone https://github.com/HiDeoo/warp-theme-vitesse.git "$env:TEMP\warp-theme-vitesse"
+Copy-Item "$env:TEMP\warp-theme-vitesse\*.yaml" "$env:APPDATA\warp\Warp\data\themes\"
 ```
 
 ## Reset Command History

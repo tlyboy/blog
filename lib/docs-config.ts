@@ -23,6 +23,7 @@ export const docsConfig: DocGroup[] = [
       { titleKey: 'WSL', slug: 'wsl' },
       { titleKey: 'Zsh', slug: 'zsh' },
       { titleKey: 'PowerShell', slug: 'powershell' },
+      { titleKey: 'Ghostty', slug: 'ghostty' },
       { titleKey: 'Warp', slug: 'warp' },
       { titleKey: 'Windows Terminal', slug: 'windows-terminal' },
       { titleKey: 'VS Code', slug: 'vscode' },
