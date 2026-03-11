@@ -12,9 +12,9 @@
 
 ### Vercel Environment Variables
 
-| Variable             | Value  | Description                              |
-| -------------------- | ------ | ---------------------------------------- |
-| `VERCEL_DEEP_CLONE`  | `true` | Enable full git history for lastUpdated  |
+| Variable            | Value  | Description                             |
+| ------------------- | ------ | --------------------------------------- |
+| `VERCEL_DEEP_CLONE` | `true` | Enable full git history for lastUpdated |
 
 ## Install
 
