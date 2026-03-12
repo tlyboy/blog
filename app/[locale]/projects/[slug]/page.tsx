@@ -71,25 +71,43 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="flex flex-wrap items-center gap-2">
           <CopyCloneButton fullName={repo.full_name} />
           {readme && <CopyMarkdownButton content={readme} />}
-          <Button variant="outline" size="sm" asChild>
-            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-              <Github className="mr-1.5 size-4" />
-              GitHub
-            </a>
+          <Button
+            variant="outline"
+            size="sm"
+            nativeButton={false}
+            render={
+              <a
+                href={repo.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
+          >
+            <Github className="mr-1.5 size-4" />
+            GitHub
           </Button>
           {repo.homepage && (
-            <Button variant="outline" size="sm" asChild>
-              <a href={repo.homepage} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-1.5 size-4" />
-                {t('visit')}
-              </a>
+            <Button
+              variant="outline"
+              size="sm"
+              nativeButton={false}
+              render={
+                <a
+                  href={repo.homepage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+            >
+              <ExternalLink className="mr-1.5 size-4" />
+              {t('visit')}
             </Button>
           )}
         </div>
       </div>
 
       {/* README */}
-      <article className="prose prose-neutral dark:prose-invert max-w-none">
+      <article className="max-w-none">
         {readme ? (
           <StreamdownRenderer content={readme} />
         ) : (

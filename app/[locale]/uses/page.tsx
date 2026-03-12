@@ -41,7 +41,7 @@ export default async function UsesPage({
       <div className="mb-8 flex items-center justify-end">
         <CopyMarkdownButton content={rawContent} />
       </div>
-      <article className="prose prose-neutral dark:prose-invert mx-auto">
+      <article className="mx-auto">
         <StreamdownRenderer content={rawContent} />
       </article>
       <div className="mt-16 border-t pt-6">

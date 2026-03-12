@@ -10,6 +10,8 @@ interface DocsPageProps {
   params: Promise<{ locale: string; slug: string[] }>
 }
 
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   const docs = getAllDocs('en', 'docs')
   return docs.map((doc) => ({
@@ -49,7 +51,7 @@ export default async function DocsSlugPage({ params }: DocsPageProps) {
 
   return (
     <>
-      <article className="prose prose-neutral dark:prose-invert max-w-none min-w-0 xl:mr-64">
+      <article className="max-w-none min-w-0 xl:mr-64">
         <StreamdownRenderer content={rawContent} />
       </article>
       <DocsFooter slug={slugPath} locale={locale} />

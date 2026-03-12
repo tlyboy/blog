@@ -13,7 +13,7 @@ pnpm start    # Start production server
 ## Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
-- **UI Components**: shadcn/ui (new-york style)
+- **UI Components**: shadcn/ui (base-nova style)
 - **Styling**: Tailwind CSS 4
 - **Package Manager**: pnpm
 - **Node Version**: >=22
@@ -29,7 +29,7 @@ lib/           # Utility functions (cn, etc.)
 
 ## shadcn/ui Configuration
 
-- Style: `new-york`
+- Style: `base-nova`
 - Icon Library: `lucide-react`
 - Add Components: `pnpm dlx shadcn@latest add <component>`
 - Component Path Alias: `@/components/ui`

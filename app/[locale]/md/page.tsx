@@ -177,7 +177,7 @@ export default async function MdPage({ params, searchParams }: MdPageProps) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-24">
-      <article className="prose prose-neutral dark:prose-invert max-w-none">
+      <article className="max-w-none">
         <StreamdownRenderer content={content} untrusted />
       </article>
     </div>

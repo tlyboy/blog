@@ -4,7 +4,6 @@ VS Code
 
 ## settings.json
 
-````json
 ```json
 {
   "claudeCode.useTerminal": true,
@@ -49,7 +48,7 @@ VS Code
   "workbench.productIconTheme": "icons-carbon",
   "workbench.startupEditor": "none"
 }
-````
+```
 
 ## vscode-profile
 

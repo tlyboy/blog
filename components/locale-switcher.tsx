@@ -28,10 +28,10 @@ export function LocaleSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="size-8">
-          <Languages className="size-4.5" />
-        </Button>
+      <DropdownMenuTrigger
+        render={<Button variant="ghost" size="icon" className="size-8" />}
+      >
+        <Languages className="size-4.5" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {Object.entries(localeLabels).map(([key, label]) => (
