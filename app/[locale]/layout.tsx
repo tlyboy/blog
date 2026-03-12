@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Inter, Fira_Code } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import {
   setRequestLocale,
@@ -10,6 +11,9 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { SiteHeader } from '@/components/layout/site-header'
 import { routing } from '@/i18n/routing'
 import { getUser } from '@/lib/github'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
+const firaCode = Fira_Code({ subsets: ['latin'], variable: '--font-mono' })
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -53,7 +57,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth">
       <head />
-      <body>
+      <body className={`${inter.variable} ${firaCode.variable} font-sans antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
