@@ -57,7 +57,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth">
       <head />
-      <body className={`${inter.variable} ${firaCode.variable} font-sans antialiased`}>
+      <body
+        className={`${inter.variable} ${firaCode.variable} font-sans antialiased`}
+      >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
