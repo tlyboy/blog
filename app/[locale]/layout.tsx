@@ -55,11 +55,14 @@ export default async function LocaleLayout({
   const [user, messages] = await Promise.all([getUser(), getMessages()])
 
   return (
-    <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth">
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${firaCode.variable} font-sans antialiased`}
+    >
       <head />
-      <body
-        className={`${inter.variable} ${firaCode.variable} font-sans antialiased`}
-      >
+      <body>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
