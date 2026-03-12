@@ -224,4 +224,3 @@ html.dark {
 .group.relative.my-4.inline-block:has(img.dark\:hidden) {
   @apply dark:hidden;
 }
-
